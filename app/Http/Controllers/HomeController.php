@@ -25,4 +25,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function save(Request $request)
+    {
+        $val=$request->country;
+        print_r($val); exit;
+    }
 }
