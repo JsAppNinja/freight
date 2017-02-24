@@ -3,136 +3,158 @@
 @section('content')
 <div class="container">
     <div class="panel-body">
-        <form class="form-horizontal" role="form" method="PUT" action="/api/home">
+        <form class="form-horizontal" role="form" method="post" action="/home">
             {{ csrf_field() }}
             <div class="container">
                 <fieldset class="route">
                     <legend class="route-legend">Route:</legend>
-                    <fieldset>
-                        <legend>Address:</legend>
-                        <div class="form-group row">
-                            <div class="col-md-4">
-                                <label>streetAddress:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input name="streetAddress" type="text" class="input"></input>
-                            </div>
+                    <div class="itemdiv">
+                        <div class="first">
+                            <fieldset>
+                                <legend>Address:</legend>
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label>streetAddress:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input name="item[streetAddress][]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">alternateStreetAddress:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[alternateStreetAddress][]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">majorMunicipality:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[majorMunicipality][]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">postalCode:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[postalCode][]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">stateProvince:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[stateProvince][]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">country:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[country][]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">AddressType:</label>
+                                    <div class="col-md-8">
+                                        <select name="item[AddressType][]">
+                                            <option value="Residence">Residence</option>
+                                            <option value="BusinessWithLoadingDockOrForklift">Business (with loading dock or forklift)</option>
+                                            <option value="BusinessWithoutLoadingDockOrForklift">Business (without loading dock or forklift)</option>
+                                            <option value="Port">Port</option>
+                                            <option value="ConstructionSite">ConstructionSite</option>
+                                            <option value="TradeShowOrConvention">Trade Show / Convention Center</option>
+                                            <option value="StorageFacility">Storage Facility</option>
+                                            <option value="MilitaryBase">Military Base</option>
+                                            <option value="StorageFacility">Storage Facility</option>
+                                            <option value="Airport">Airport</option>
+                                            <option value="OtherSecuredLocation">Other Secured or Limited Access Location</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>TimeFrame:</legend>
+                                <div class="form-group row">
+                                    <label class="col-md-4">Earliest Arrival:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[earliestArrival][]" type="date" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">Latest Arrival:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[latestArrival][]" type="date" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">timeFrameType:</label>
+                                    <div class="col-md-8">
+                                        <label class="switch">
+                                            <input name="item[timeFrameType][]" id="timeFrameType" type="checkbox">
+                                            <div class="slider round"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Attribute:</legend>
+                                <div class="form-group row">
+                                    <label class="col-md-4">Inside:</label>
+                                    <div class="col-md-8">
+                                        <label class="switch">
+                                            <input name="item[inside][]" id="inside" type="checkbox">
+                                            <div class="slider round"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">LiftgateRequired:</label>
+                                    <div class="col-md-8">
+                                        <label class="switch">
+                                            <input name="item[liftgateRequired][]" id="liftgateRequired" type="checkbox">
+                                            <div class="slider round"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">callBeforeArrival:</label>
+                                    <div class="col-md-8">
+                                        <label class="switch">
+                                            <input name="item[callBeforeArrival][]" id="callBeforeArrival" type="checkbox">
+                                            <div class="slider round"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">appointmentRequired:</label>
+                                    <div class="col-md-8">
+                                        <label class="switch">
+                                            <input name="item[appointmentRequired][]" id="appointmentRequired" type="checkbox">
+                                            <div class="slider round"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Contact:</legend>
+                                <div class="form-group row">
+                                    <label class="col-md-4">name:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[name][]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">companyName:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[companyName][]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">phoneNumber:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[phoneNumber][]" type="tel" class="input"></input>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">alternateStreetAddress:</label>
-                            <div class="col-md-8">
-                                <input name="alternateStreetAddress" type="text" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">majorMunicipality:</label>
-                            <div class="col-md-8">
-                                <input name="majorMunicipality" type="text" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">postalCode:</label>
-                            <div class="col-md-8">
-                                <input name="postalCode" type="text" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">stateProvince:</label>
-                            <div class="col-md-8">
-                                <input name="stateProvince" type="text" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">country:</label>
-                            <div class="col-md-8">
-                                <input name="country" type="text" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">AddressType:</label>
-                            <div class="col-md-8">
-                                <select>
-                                    <option value="Residence">Residence</option>
-                                    <option value="BusinessWithLoadingDockOrForklift">Business (with loading dock or forklift)</option>
-                                    <option value="BusinessWithoutLoadingDockOrForklift">Business (without loading dock or forklift)</option>
-                                    <option value="Port">Port</option>
-                                    <option value="ConstructionSite">ConstructionSite</option>
-                                    <option value="TradeShowOrConvention">Trade Show / Convention Center</option>
-                                    <option value="StorageFacility">Storage Facility</option>
-                                    <option value="MilitaryBase">Military Base</option>
-                                    <option value="StorageFacility">Storage Facility</option>
-                                    <option value="Airport">Airport</option>
-                                    <option value="OtherSecuredLocation">Other Secured or Limited Access Location</option>
-                                </select>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>TimeFrame:</legend>
-                        <div class="form-group row">
-                            <label class="col-md-4">Earliest Arrival:</label>
-                            <div class="col-md-8">
-                                <input name="earliestArrival" type="date" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">Latest Arrival:</label>
-                            <div class="col-md-8">
-                                <input name="earliestArrival" type="date" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">timeFrameType:</label>
-                            <div class="col-md-8">
-                                <label class="switch">
-                                    <input id="timeFrameType" type="checkbox">
-                                    <div class="slider round"></div>
-                                </label>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Attribute:</legend>
-                        <div class="form-group row">
-                            <label class="col-md-4">Inside:</label>
-                            <div class="col-md-8">
-                                <label class="switch">
-                                    <input id="inside" type="checkbox">
-                                    <div class="slider round"></div>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">LiftgateRequired:</label>
-                            <div class="col-md-8">
-                                <label class="switch">
-                                    <input id="liftgateRequired" type="checkbox">
-                                    <div class="slider round"></div>
-                                </label>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Contact:</legend>
-                        <div class="form-group row">
-                            <label class="col-md-4">name:</label>
-                            <div class="col-md-8">
-                                <input name="name" type="text" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">companyName:</label>
-                            <div class="col-md-8">
-                                <input name="companyName" type="text" class="input"></input>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">phoneNumber:</label>
-                            <div class="col-md-8">
-                                <input name="phoneNumber" type="tel" class="input"></input>
-                            </div>
-                        </div>
-                    </fieldset>
+                    </div>
                     <button id="addItem"><i class="glyphicon glyphicon-plus"></i>add new Item</button>
                 </fieldset>
                 <fieldset class="route">
@@ -140,7 +162,7 @@
                         <div class="form-group row">
                             <label class="col-md-4">Commodity:</label>
                             <div class="col-md-8">
-                                <select>
+                                <select name="Commodity">
                                     <option value="NewCommercialGoods">NewCommercialGoods</option>
                                     <option value="UsedCommercialGoods">UsedCommercialGoods</option>
                                     <option value="WineLiquorBeerSpirits">WineLiquorBeerSpirits</option>
@@ -243,7 +265,7 @@
                             <label class="col-md-4">stackable:</label>
                             <div class="col-md-8">
                                 <label class="switch">
-                                    <input id="stackable" type="checkbox">
+                                    <input name="stackable" id="stackable" type="checkbox" >
                                     <div class="slider round"></div>
                                 </label>
                             </div>
@@ -252,7 +274,7 @@
                             <label class="col-md-4">hazardous:</label>
                             <div class="col-md-8">
                                 <label class="switch">
-                                    <input id="hazardous" type="checkbox">
+                                    <input name="hazardous" id="hazardous" type="checkbox">
                                     <div class="slider round"></div>
                                 </label>
                             </div>
@@ -293,7 +315,7 @@
                         <label class="col-md-4">protectfromFreezing:</label>
                         <div class="col-md-8">
                             <label class="switch">
-                                <input id="protectfromFreezing" type="checkbox">
+                                <input name="protectfromFreezing" id="protectfromFreezing" type="checkbox">
                                 <div class="slider round"></div>
                             </label>
                         </div>
@@ -302,7 +324,7 @@
                         <label class="col-md-4">sortandSegregate:</label>
                         <div class="col-md-8">
                             <label class="switch">
-                                <input id="sortandSegregate" type="checkbox">
+                                <input name="sortandSegregate" id="sortandSegregate" type="checkbox">
                                 <div class="slider round"></div>
                             </label>
                         </div>
@@ -311,7 +333,7 @@
                         <label class="col-md-4">blindShipmentCoordination:</label>
                         <div class="col-md-8">
                             <label class="switch">
-                                <input id="blindShipmentCoordination" type="checkbox">
+                                <input name="blindShipmentCoordination" id="blindShipmentCoordination" type="checkbox">
                                 <div class="slider round"></div>
                             </label>
                         </div>
@@ -320,17 +342,23 @@
                 <fieldset class="route">
                     <legend class="route-legend">ThirdPartyId</legend>
                     <div>
-                        <input type="radio" name="gender" value="uship" checked> UShip<br>
-                        <input type="radio" name="gender" value="UPS"> UPS<br>
-                        <input type="radio" name="gender" value="FedEx"> FedEx
+                        <input type="radio" name="thirdParty" value="uship" checked> UShip<br>
+                        <input type="radio" name="thirdParty" value="UPS"> UPS<br>
+                        <input type="radio" name="thirdParty" value="FedEx"> FedEx
                     </div>
                 </fieldset>
-                <input type="submit" value="Send">
+                <input type="submit" value="Send" id="submit">
             </div>
         </form>
     </div>
 </div>
 @endsection
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
-
+    jQuery(document).ready(function($) {
+        $('#addItem').click(function(e) {
+            e.preventDefault();
+            $( ".first" ).clone().appendTo( ".itemdiv" );
+        });
+    });
 </script>
