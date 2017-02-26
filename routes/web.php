@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     if(Auth::check()){
-        return view('home',[$i=0]);
+        return view('home');
     }else return view('\Auth\login');
 });
 
