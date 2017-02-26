@@ -13,11 +13,11 @@
 
 Route::get('/', function () {
     if(Auth::check()){
-        return view('home');
+        return view('home',[$i=0]);
     }else return view('\Auth\login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::post('/home','HomeController@save');
+Route::post('/home','HomeController@sendjson');

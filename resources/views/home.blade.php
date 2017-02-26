@@ -8,8 +8,8 @@
             <div class="container">
                 <fieldset class="route">
                     <legend class="route-legend">Route:</legend>
-                    <div class="itemdiv">
-                        <div class="first">
+                    <div class="itemdiv" id="itemdiv">
+                        <div class="first" id="first">
                             <fieldset>
                                 <legend>Address:</legend>
                                 <div class="form-group row">
@@ -17,43 +17,43 @@
                                         <label>streetAddress:</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input name="item[streetAddress][]" type="text" class="input"></input>
+                                        <input name="item[streetAddress][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">alternateStreetAddress:</label>
                                     <div class="col-md-8">
-                                        <input name="item[alternateStreetAddress][]" type="text" class="input"></input>
+                                        <input name="item[alternateStreetAddress][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">majorMunicipality:</label>
                                     <div class="col-md-8">
-                                        <input name="item[majorMunicipality][]" type="text" class="input"></input>
+                                        <input name="item[majorMunicipality][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">postalCode:</label>
                                     <div class="col-md-8">
-                                        <input name="item[postalCode][]" type="text" class="input"></input>
+                                        <input name="item[postalCode][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">stateProvince:</label>
                                     <div class="col-md-8">
-                                        <input name="item[stateProvince][]" type="text" class="input"></input>
+                                        <input name="item[stateProvince][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">country:</label>
                                     <div class="col-md-8">
-                                        <input name="item[country][]" type="text" class="input"></input>
+                                        <input name="item[country][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">AddressType:</label>
                                     <div class="col-md-8">
-                                        <select name="item[AddressType][]">
+                                        <select name="item[AddressType][0]">
                                             <option value="Residence">Residence</option>
                                             <option value="BusinessWithLoadingDockOrForklift">Business (with loading dock or forklift)</option>
                                             <option value="BusinessWithoutLoadingDockOrForklift">Business (without loading dock or forklift)</option>
@@ -74,22 +74,20 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">Earliest Arrival:</label>
                                     <div class="col-md-8">
-                                        <input name="item[earliestArrival][]" type="date" class="input"></input>
+                                        <input name="item[earliestArrival][0]" type="date" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">Latest Arrival:</label>
                                     <div class="col-md-8">
-                                        <input name="item[latestArrival][]" type="date" class="input"></input>
+                                        <input name="item[latestArrival][0]" type="date" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">timeFrameType:</label>
                                     <div class="col-md-8">
-                                        <label class="switch">
-                                            <input name="item[timeFrameType][]" id="timeFrameType" type="checkbox">
-                                            <div class="slider round"></div>
-                                        </label>
+                                        <input type="radio" name="item[timeFrameType][0]" value="on"> Yes
+                                        <input type="radio" name="item[timeFrameType][0]" value="off" checked> No<br>
                                     </div>
                                 </div>
                             </fieldset>
@@ -98,37 +96,29 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">Inside:</label>
                                     <div class="col-md-8">
-                                        <label class="switch">
-                                            <input name="item[inside][]" id="inside" type="checkbox">
-                                            <div class="slider round"></div>
-                                        </label>
+                                        <input type="radio" name="item[inside][0]" value="true"> Yes
+                                        <input type="radio" name="item[inside][0]" value="false" checked> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">LiftgateRequired:</label>
                                     <div class="col-md-8">
-                                        <label class="switch">
-                                            <input name="item[liftgateRequired][]" id="liftgateRequired" type="checkbox">
-                                            <div class="slider round"></div>
-                                        </label>
+                                        <input type="radio" name="item[liftgateRequired][0]" value="true"> Yes
+                                        <input type="radio" name="item[liftgateRequired][0]" value="false" checked> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">callBeforeArrival:</label>
                                     <div class="col-md-8">
-                                        <label class="switch">
-                                            <input name="item[callBeforeArrival][]" id="callBeforeArrival" type="checkbox">
-                                            <div class="slider round"></div>
-                                        </label>
+                                        <input type="radio" name="item[callBeforeArrival][0]" value="true"> Yes
+                                        <input type="radio" name="item[callBeforeArrival][0]" value="false" checked> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">appointmentRequired:</label>
                                     <div class="col-md-8">
-                                        <label class="switch">
-                                            <input name="item[appointmentRequired][]" id="appointmentRequired" type="checkbox">
-                                            <div class="slider round"></div>
-                                        </label>
+                                        <input type="radio" name="item[appointmentRequired][0]" value="true"> Yes
+                                        <input type="radio" name="item[appointmentRequired][0]" value="false" checked> No<br>
                                     </div>
                                 </div>
                             </fieldset>
@@ -137,19 +127,19 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">name:</label>
                                     <div class="col-md-8">
-                                        <input name="item[name][]" type="text" class="input"></input>
+                                        <input name="item[name][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">companyName:</label>
                                     <div class="col-md-8">
-                                        <input name="item[companyName][]" type="text" class="input"></input>
+                                        <input name="item[companyName][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">phoneNumber:</label>
                                     <div class="col-md-8">
-                                        <input name="item[phoneNumber][]" type="tel" class="input"></input>
+                                        <input name="item[phoneNumber][0]" type="tel" class="input"></input>
                                     </div>
                                 </div>
                             </fieldset>
@@ -264,25 +254,21 @@
                         <div class="form-group row">
                             <label class="col-md-4">stackable:</label>
                             <div class="col-md-8">
-                                <label class="switch">
-                                    <input name="stackable" id="stackable" type="checkbox" >
-                                    <div class="slider round"></div>
-                                </label>
+                                <input type="radio" name="stackable" value="true"> Yes
+                                <input type="radio" name="stackable" value="false" checked> No<br>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4">hazardous:</label>
                             <div class="col-md-8">
-                                <label class="switch">
-                                    <input name="hazardous" id="hazardous" type="checkbox">
-                                    <div class="slider round"></div>
-                                </label>
+                                <input type="radio" name="hazardous" value="true"> Yes
+                                <input type="radio" name="hazardous" value="false" checked> No<br>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4">handlingUnit:</label>
                             <div class="col-md-8">
-                                <select>
+                                <select name="handlingUnit">
                                     <option value="Boxes">Boxes</option>
                                     <option value="Cartons">Cartons</option>
                                     <option value="Crates">Crates</option>
@@ -314,28 +300,22 @@
                     <div class="form-group row">
                         <label class="col-md-4">protectfromFreezing:</label>
                         <div class="col-md-8">
-                            <label class="switch">
-                                <input name="protectfromFreezing" id="protectfromFreezing" type="checkbox">
-                                <div class="slider round"></div>
-                            </label>
+                            <input type="radio" name="protectfromFreezing" value="true" > Yes
+                            <input type="radio" name="protectfromFreezing" value="false"checked> No<br>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4">sortandSegregate:</label>
                         <div class="col-md-8">
-                            <label class="switch">
-                                <input name="sortandSegregate" id="sortandSegregate" type="checkbox">
-                                <div class="slider round"></div>
-                            </label>
+                            <input type="radio" name="sortandSegregate" value="true" > Yes
+                            <input type="radio" name="sortandSegregate" value="false" checked> No<br>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4">blindShipmentCoordination:</label>
                         <div class="col-md-8">
-                            <label class="switch">
-                                <input name="blindShipmentCoordination" id="blindShipmentCoordination" type="checkbox">
-                                <div class="slider round"></div>
-                            </label>
+                            <input type="radio" name="blindShipmentCoordination" value="true" > Yes
+                            <input type="radio" name="blindShipmentCoordination" value="false" checked> No<br>
                         </div>
                     </div>
                 </fieldset>
@@ -356,9 +336,20 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
     jQuery(document).ready(function($) {
+        var i=0;
         $('#addItem').click(function(e) {
+            i++;
             e.preventDefault();
-            $( ".first" ).clone().appendTo( ".itemdiv" );
+            var newdiv = $("#itemdiv div.first").eq(0).clone();
+            console.log(newdiv);
+            newdiv.find('input').each(function(){
+                this.name = this.name.replace('[0]', '['+i+']');
+            });
+            newdiv.find('select').each(function(){
+                this.name = this.name.replace('[0]', '['+i+']');
+            })
+            $('#itemdiv').append(newdiv);
+            //            $( ".first" ).clone().appendTo( ".itemdiv" );
         });
     });
 </script>
