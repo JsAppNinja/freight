@@ -5,6 +5,15 @@
     <div class="panel-body">
         <form class="form-horizontal" role="form" method="post" action="/home">
             {{ csrf_field() }}
+            @if (count($errors))
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+            @endif
             <div class="container">
                 <fieldset class="route">
                     <legend class="route-legend">Route:</legend>
@@ -17,43 +26,43 @@
                                         <label>streetAddress:</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input name="item[streetAddress][0]" type="text" class="input"></input>
+                                        <input name="item[0][streetAddress][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">alternateStreetAddress:</label>
                                     <div class="col-md-8">
-                                        <input name="item[alternateStreetAddress][0]" type="text" class="input"></input>
+                                        <input name="item[0][alternateStreetAddress][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">majorMunicipality:</label>
                                     <div class="col-md-8">
-                                        <input name="item[majorMunicipality][0]" type="text" class="input"></input>
+                                        <input name="item[0][majorMunicipality][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">postalCode:</label>
                                     <div class="col-md-8">
-                                        <input name="item[postalCode][0]" type="text" class="input"></input>
+                                        <input name="item[0][postalCode][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">stateProvince:</label>
                                     <div class="col-md-8">
-                                        <input name="item[stateProvince][0]" type="text" class="input"></input>
+                                        <input name="item[0][stateProvince][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">country:</label>
                                     <div class="col-md-8">
-                                        <input name="item[country][0]" type="text" class="input"></input>
+                                        <input name="item[0][country][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">AddressType:</label>
                                     <div class="col-md-8">
-                                        <select name="item[AddressType][0]">
+                                        <select name="item[0][AddressType][0]">
                                             <option value="Residence">Residence</option>
                                             <option value="BusinessWithLoadingDockOrForklift">Business (with loading dock or forklift)</option>
                                             <option value="BusinessWithoutLoadingDockOrForklift">Business (without loading dock or forklift)</option>
@@ -74,20 +83,20 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">Earliest Arrival:</label>
                                     <div class="col-md-8">
-                                        <input name="item[earliestArrival][0]" type="date" class="input"></input>
+                                        <input name="item[0][earliestArrival][0]" type="date" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">Latest Arrival:</label>
                                     <div class="col-md-8">
-                                        <input name="item[latestArrival][0]" type="date" class="input"></input>
+                                        <input name="item[0][latestArrival][0]" type="date" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">timeFrameType:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[timeFrameType][0]" value="on"> Yes
-                                        <input type="radio" name="item[timeFrameType][0]" value="off" checked> No<br>
+                                        <input type="radio" name="item[0][timeFrameType][0]" value="on"> Yes
+                                        <input type="radio" name="item[0][timeFrameType][0]" value="off" checked> No<br>
                                     </div>
                                 </div>
                             </fieldset>
@@ -96,29 +105,29 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">Inside:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[inside][0]" value="true"> Yes
-                                        <input type="radio" name="item[inside][0]" value="false" checked> No<br>
+                                        <input type="radio" name="item[0][inside][0]" value="true"> Yes
+                                        <input type="radio" name="item[0][inside][0]" value="false" checked> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">LiftgateRequired:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[liftgateRequired][0]" value="true"> Yes
-                                        <input type="radio" name="item[liftgateRequired][0]" value="false" checked> No<br>
+                                        <input type="radio" name="item[0][liftgateRequired][0]" value="true"> Yes
+                                        <input type="radio" name="item[0][liftgateRequired][0]" value="false" checked> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">callBeforeArrival:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[callBeforeArrival][0]" value="true"> Yes
-                                        <input type="radio" name="item[callBeforeArrival][0]" value="false" checked> No<br>
+                                        <input type="radio" name="item[0][callBeforeArrival][0]" value="true"> Yes
+                                        <input type="radio" name="item[0][callBeforeArrival][0]" value="false" checked> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">appointmentRequired:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[appointmentRequired][0]" value="true"> Yes
-                                        <input type="radio" name="item[appointmentRequired][0]" value="false" checked> No<br>
+                                        <input type="radio" name="item[0][appointmentRequired][0]" value="true"> Yes
+                                        <input type="radio" name="item[0][appointmentRequired][0]" value="false" checked> No<br>
                                     </div>
                                 </div>
                             </fieldset>
@@ -127,19 +136,19 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">name:</label>
                                     <div class="col-md-8">
-                                        <input name="item[name][0]" type="text" class="input"></input>
+                                        <input name="item[0][name][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">companyName:</label>
                                     <div class="col-md-8">
-                                        <input name="item[companyName][0]" type="text" class="input"></input>
+                                        <input name="item[0][companyName][0]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">phoneNumber:</label>
                                     <div class="col-md-8">
-                                        <input name="item[phoneNumber][0]" type="tel" class="input"></input>
+                                        <input name="item[0][phoneNumber][0]" type="tel" class="input"></input>
                                     </div>
                                 </div>
                             </fieldset>
@@ -349,7 +358,6 @@
                 this.name = this.name.replace('[0]', '['+i+']');
             })
             $('#itemdiv').append(newdiv);
-            //            $( ".first" ).clone().appendTo( ".itemdiv" );
         });
     });
 </script>
