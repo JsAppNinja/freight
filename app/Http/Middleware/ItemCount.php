@@ -16,8 +16,8 @@ class ItemCount
     public function handle($request, Closure $next)
     {
         if (isset($request->thirdParty)) {
-            if (count($request->item) > 0) {
-                $request->attributes->add(array('count' => count($request->item)));
+            if (count($request->items) > 0) {
+                $request->attributes->add(array('count' => count($request->items)));
                 return $next($request);
             }
         }

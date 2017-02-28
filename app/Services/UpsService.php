@@ -12,30 +12,46 @@ class UpsService implements ShippingServiceInterface
 {
     public function getRule($count)
     {
-        return [
-            'item["streetAddress"]' => 'required|string|max:255',
-            'item["alternateStreetAddress"]' => 'required|string|max:255',
-            'item["majorMunicipality"]' => 'required|string|max:255',
-            'item["postalCode"]' => 'required|string|max:255',
-            'item["stateProvince"]' => 'required|string|max:255',
-            'item["country"]' => 'required|string|max:255',
-            'item["AddressType"]' => 'required|string|max:255',
-            'item["earliestArrival"]' => 'required|date|after:tomorrow',
-            'item["earliestArrival"]' => 'required|date|after:item["earliestArrival"]',
-            'item["name"]' => 'required|string|max:255',
-            'item["companyName"]' => 'required|string|max:255',
-            'item["phoneNumber"]' => 'required|integer|max:50',
-            'Commodity' => 'required|string|max:255',
-            'unitCount' => 'required|integer|max:50',
-            'packaging' => 'required|string|max:255',
-            'lengthInMeters' => 'required|numeric|min:2|max:5',
-            'heightInMeters' => 'required|numeric|min:2|max:5',
-            'lbs' => 'required|numeric|min:2|max:5',
-            'freightClass' => 'required|numeric|min:2|max:5',
-            'handlingUnit' => 'required|string|max:255',
+        $rules = [
+            'item' => 'array|min:1',
         ];
+
+        // origin Address rules
+
+        $rules['item.origin.streetAddress'] = 'required|string|max:255' ;
+        $rules['item.origin.majorMunicipality'] = 'required|string|max:255' ;
+        $rules['item.origin.postalCode'] = 'required|string|max:255' ;
+        $rules['item.origin.stateProvince'] = 'required|string|max:255' ;
+        $rules['item.origin.country'] = 'required|string|max:255' ;
+        $rules['item.origin.AddressType'] = 'required|string|max:255' ;
+        $rules['item.origin.earliestArrival'] = 'required|date' ;
+        $rules['item.origin.latestArrival'] = 'required|date' ;
+        $rules['item.origin.name'] = 'required|string|max:255' ;
+        $rules['item.origin.companyName'] = 'required|string|max:255' ;
+        $rules['item.origin.phoneNumber'] = 'required|string|max:255' ;
+
+        // destination Addres rules
+
+        $rules['item.destination.postalCode'] = 'required|string|max:255' ;
+        $rules['item.destination.country'] = 'required|string|max:255' ;
+        $rules['item.destination.AddressType'] = 'required|string|max:255' ;
+
+        // items rules
+
+        for ($i = 0; $i < $count; $i++) {
+            $rules['items.'.$i.'.Commodity'] = 'required|string|max:255';
+            $rules['items.'.$i.'.unitCount'] = 'required|integer|max:50';
+            $rules['items.'.$i.'.packaging'] = 'required|string|max:255';
+            $rules['items.'.$i.'.lengthInMeters'] = 'required|numeric';
+            $rules['items.'.$i.'.heightInMeters'] = 'required|numeric';
+            $rules['items.'.$i.'.lbs'] = 'required|numeric';
+            $rules['items.'.$i.'.freightClass'] = 'required|numeric';
+            $rules['items.'.$i.'.handlingUnit'] = 'required|string|max:255';
+        }
+
+        return $rules;
     }
-    public function call($data)
+    public function call($request)
     {
 
     }

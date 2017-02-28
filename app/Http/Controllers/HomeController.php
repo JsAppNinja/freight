@@ -34,10 +34,8 @@ class HomeController extends Controller
     public function sendjson(Request $request)
     {
         $count = $request->get('count');
-        print_r($request->item[0]['streetAddress'][0]); exit;
         $rules = $this->shippingService->getRule($count);
-        // print_r($rules); exit;
         $this->validate($request,$rules);
-//        $shippingApi = $this->shippingService->call($request);
+        $this->shippingService->call($request);
     }
 }
