@@ -18,6 +18,8 @@ class UshipService implements ShippingServiceInterface
     *
     */
 
+
+
     public function getRule($count)
     {
         $rules = [
@@ -62,11 +64,12 @@ class UshipService implements ShippingServiceInterface
 
     /**
      *  @param Array
-     *  make uship request body, call uship Api
+     *  @return Json
      *
+     *  make uship json and return
      */
 
-    public function call($request)
+    public function returnJson($request)
     {
         $uship = array();
         $address = array();
@@ -74,51 +77,51 @@ class UshipService implements ShippingServiceInterface
 
         // Origin Address
 
-        $origin['streetAddress'] = $request->item['origin']['streetAddress'];
-        $origin['alternateStreetAddress'] = $request->item['origin']['alternateStreetAddress'];
-        $origin['majorMunicipality'] = $request->item['origin']['majorMunicipality'];
-        $origin['postalCode'] = $request->item['origin']['postalCode'];
-        $origin['stateProvince'] = $request->item['origin']['stateProvince'];
-        $origin['country'] = $request->item['origin']['country'];
-        $origin['AddressType'] = $request->item['origin']['AddressType'];
+        $originAddress['streetAddress'] = $request->item['origin']['streetAddress'];
+        $originAddress['alternateStreetAddress'] = $request->item['origin']['alternateStreetAddress'];
+        $originAddress['majorMunicipality'] = $request->item['origin']['majorMunicipality'];
+        $originAddress['postalCode'] = $request->item['origin']['postalCode'];
+        $originAddress['stateProvince'] = $request->item['origin']['stateProvince'];
+        $originAddress['country'] = $request->item['origin']['country'];
+        $originAddress['AddressType'] = $request->item['origin']['AddressType'];
 
         // Origin TimeFrame
 
-        $origin['earliestArrival'] = $request->item['origin']['earliestArrival'];
-        $origin['latestArrival'] = $request->item['origin']['latestArrival'];
-        $origin['timeFrameType'] = $request->item['origin']['timeFrameType'];
+        $originTimeFrame['earliestArrival'] = $request->item['origin']['earliestArrival'];
+        $originTimeFrame['latestArrival'] = $request->item['origin']['latestArrival'];
+        $originTimeFrame['timeFrameType'] = $request->item['origin']['timeFrameType'];
 
         // Origin attributes
 
-        $origin['inside'] = $request->item['origin']['inside'];
-        $origin['liftgateRequired'] = $request->item['origin']['liftgateRequired'];
-        $origin['callBeforeArrival'] = $request->item['origin']['callBeforeArrival'];
-        $origin['appointmentRequired'] = $request->item['origin']['appointmentRequired'];
+        $originAttributes['inside'] = $request->item['origin']['inside'];
+        $originAttributes['liftgateRequired'] = $request->item['origin']['liftgateRequired'];
+        $originAttributes['callBeforeArrival'] = $request->item['origin']['callBeforeArrival'];
+        $originAttributes['appointmentRequired'] = $request->item['origin']['appointmentRequired'];
 
         // Origin Contacts
 
-        $origin['name'] = $request->item['origin']['name'];
-        $origin['companyName'] = $request->item['origin']['companyName'];
-        $origin['phoneNumber'] = $request->item['origin']['phoneNumber'];
+        $originContacts['name'] = $request->item['origin']['name'];
+        $originContacts['companyName'] = $request->item['origin']['companyName'];
+        $originContacts['phoneNumber'] = $request->item['origin']['phoneNumber'];
 
         // Desitination Address
 
-        $destination['postalCode'] = $request->item['destination']['postalCode'];
-        $destination['country'] = $request->item['destination']['country'];
-        $destination['AddressType'] = $request->item['destination']['AddressType'];
+        $destinationAddress['postalCode'] = $request->item['destination']['postalCode'];
+        $destinationAddress['country'] = $request->item['destination']['country'];
+        $destinationAddress['AddressType'] = $request->item['destination']['AddressType'];
 
         // Desitination attributes
 
-        $destination['inside'] = $request->item['destination']['inside'];
-        $destination['liftgateRequired'] = $request->item['destination']['liftgateRequired'];
-        $destination['callBeforeArrival'] = $request->item['destination']['callBeforeArrival'];
-        $destination['appointmentRequired'] = $request->item['destination']['appointmentRequired'];
+        $destinationAttributes['inside'] = $request->item['destination']['inside'];
+        $destinationAttributes['liftgateRequired'] = $request->item['destination']['liftgateRequired'];
+        $destinationAttributes['callBeforeArrival'] = $request->item['destination']['callBeforeArrival'];
+        $destinationAttributes['appointmentRequired'] = $request->item['destination']['appointmentRequired'];
 
         // Destination Contacts
 
-        $destination['name'] = $request->item['destination']['name'];
-        $destination['companyName'] = $request->item['destination']['companyName'];
-        $destination['phoneNumber'] = $request->item['destination']['phoneNumber'];
+        $destinationContacts['name'] = $request->item['destination']['name'];
+        $destinationContacts['companyName'] = $request->item['destination']['companyName'];
+        $destinationContacts['phoneNumber'] = $request->item['destination']['phoneNumber'];
 
         for ( $i = 0; $i < $count; $i++) {
             $commodity[$i] = $request->items[$i]['Commodity'];
@@ -137,9 +140,19 @@ class UshipService implements ShippingServiceInterface
 
         // Route/item Array
 
+        $origin['address'] = $originAddress;
+        $origin['timeFrame'] = $originTimeFrame;
+        $origin['attributes'] = $originAttributes;
+        $origin['contact'] = $originContacts;
+
+        $destination['address'] = $destinationAddress;
+        $destination['attributes'] = $destinationAttributes;
+        $destination['contact'] = $destinationContacts;
+
         array_push($address,$origin);
         array_push($address,$destination);
-        $route['Items'] = $address;
+        $route['items'] = $address;
+
         // Items Array
 
         for ( $i = 0; $i < $count; $i++) {
@@ -160,7 +173,77 @@ class UshipService implements ShippingServiceInterface
         $uship['route'] = $route;
         $uship['items'] = $items;
         $uship['attributes'] = $attributes;
-        print_r(response()->json($uship)); exit;
+        return json_encode($uship);
+    }
+
+    /**
+     *  @param $client_id : string
+     *         $client_secret : string
+     *
+     *  @return string
+     *
+     *  post data to https://api.uship.com/oauth/token and get the access_token
+     */
+
+    public function getAccessToken($client_id, $client_secret){
+        $url = "https://api.uship.com/oauth/token";
+        $grant_type = "client_credentials";
+        $data = 'grant_type='.$grant_type.'&client_id='.$client_id.'&client_secret='.$client_secret;
+
+        // post to https://api.uship.com/oauth/token
+
+        $ch = curl_init( $url );
+        curl_setopt( $ch, CURLOPT_POST, 1);
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt( $ch, CURLOPT_HEADER, 0);
+        curl_setopt( $ch, CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded'));
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
+        if(curl_exec($ch) === false)
+        {
+            echo 'Curl error: ' . curl_error($ch);
+        }else {
+            $response = curl_exec( $ch );
+        }
+
+        //convert string to json
+        $result = json_decode($response);
+        return $result->access_token;
+    }
+
+    /**
+     *  @param JSON
+     *
+     *  @return price
+     *
+     *  call uship api & return pricing.
+     */
+
+    public function call($uship){
+        $client_id = env('USHIPAPI_CLIENTID');
+        $client_secret = env('USHIPAPI_CLIENT_SECRET');
+
+        $access_token = $this->getAccessToken($client_id, $client_secret);
+        $authorization = "Bearer ".$access_token;
+
+        $uship_endpoint_url = "https://api.uship.com/v2/estimate";
+        $ch = curl_init( $uship_endpoint_url );
+        curl_setopt( $ch, CURLOPT_POST, 1);
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $uship);
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt( $ch, CURLOPT_HEADER, 0);
+        curl_setopt( $ch, CURLOPT_HTTPHEADER,array('authorization: '.$authorization));
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
+        if(curl_exec($ch) === false)
+        {
+            echo 'Curl error: ' . curl_error($ch);
+        }else {
+            $response = curl_exec( $ch );
+        }
+        $result = json_decode($response);
+        return $result->price->value;
     }
 }
 ?>

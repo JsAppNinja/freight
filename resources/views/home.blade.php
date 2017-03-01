@@ -95,8 +95,9 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">timeFrameType:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[origin][timeFrameType]" value="on"> Yes
-                                        <input type="radio" name="item[origin][timeFrameType]" value="off" checked> No<br>
+                                        <input type="radio" name="item[origin][timeFrameType]" value="on"> On
+                                        <input type="radio" name="item[origin][timeFrameType]" value="between" checked> Between
+                                        <input type="radio" name="item[origin][timeFrameType]" value="daysdelay" checked> DaysDelay<br>
                                     </div>
                                 </div>
                             </fieldset>
@@ -251,6 +252,7 @@
                                     <div class="col-md-8">
                                         <select name="items[0][Commodity]">
                                             <option value="NewCommercialGoods">NewCommercialGoods</option>
+                                            <option value="CarsLightTrucks">CarsLightTrucks</option>
                                             <option value="UsedCommercialGoods">UsedCommercialGoods</option>
                                             <option value="WineLiquorBeerSpirits">WineLiquorBeerSpirits</option>
                                             <option value="NonPerishableFoodsBeverages">NonPerishableFoodsBeverages</option>

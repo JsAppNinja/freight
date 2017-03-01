@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Contracts\ShippingServiceInterface;
 
 class HomeController extends Controller
@@ -36,6 +37,8 @@ class HomeController extends Controller
         $count = $request->get('count');
         $rules = $this->shippingService->getRule($count);
         $this->validate($request,$rules);
-        $this->shippingService->call($request);
+        $uship = $this->shippingService->returnJson($request);
+        $price = $this->shippingService->call($uship);
+        print_r($price); exit;
     }
 }

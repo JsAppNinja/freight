@@ -51,7 +51,7 @@ class FedexService implements ShippingServiceInterface
 
         return $rules;
     }
-    public function call($request)
+    public function returnJson($request)
     {
 
     }
