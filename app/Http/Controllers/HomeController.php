@@ -37,8 +37,8 @@ class HomeController extends Controller
         $count = $request->get('count');
         $rules = $this->shippingService->getRule($count);
         $this->validate($request,$rules);
-        $uship = $this->shippingService->returnJson($request);
-        $price = $this->shippingService->call($uship);
+        $shippingData = $this->shippingService->returnData($request);
+        $price = $this->shippingService->call($shippingData);
         print_r($price); exit;
     }
 }

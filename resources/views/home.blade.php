@@ -95,9 +95,9 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">timeFrameType:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[origin][timeFrameType]" value="on"> On
-                                        <input type="radio" name="item[origin][timeFrameType]" value="between" checked> Between
-                                        <input type="radio" name="item[origin][timeFrameType]" value="daysdelay" checked> DaysDelay<br>
+                                        <input type="radio" name="item[origin][timeFrameType]" value="on" checked> On
+                                        <input type="radio" name="item[origin][timeFrameType]" value="between"> Between
+                                        <input type="radio" name="item[origin][timeFrameType]" value="daysdelay"> DaysDelay<br>
                                     </div>
                                 </div>
                             </fieldset>

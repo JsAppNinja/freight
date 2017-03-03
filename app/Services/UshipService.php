@@ -69,7 +69,7 @@ class UshipService implements ShippingServiceInterface
      *  make uship json and return
      */
 
-    public function returnJson($request)
+    public function returnData($request)
     {
         $uship = array();
         $address = array();
@@ -202,7 +202,7 @@ class UshipService implements ShippingServiceInterface
         curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
         if(curl_exec($ch) === false)
         {
-            echo 'Curl error: ' . curl_error($ch);
+            echo 'Curl error: ' . curl_error($ch); exit;
         }else {
             $response = curl_exec( $ch );
         }
@@ -221,7 +221,7 @@ class UshipService implements ShippingServiceInterface
      */
 
     public function call($uship){
-        $client_id = env('USHIPAPI_CLIENTID');
+        $client_id = env('USHIPAPI_CLIENT_ID');
         $client_secret = env('USHIPAPI_CLIENT_SECRET');
 
         $access_token = $this->getAccessToken($client_id, $client_secret);
@@ -238,7 +238,7 @@ class UshipService implements ShippingServiceInterface
         curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
         if(curl_exec($ch) === false)
         {
-            echo 'Curl error: ' . curl_error($ch);
+            echo 'Curl error: ' . curl_error($ch); exit;
         }else {
             $response = curl_exec( $ch );
         }

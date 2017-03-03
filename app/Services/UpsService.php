@@ -7,6 +7,14 @@
 namespace App\Services;
 
 use App\Contracts\ShippingServiceInterface;
+use Ups\Entity\Shipment;
+use Ups\Rate;
+use Ups\Entity\Address;
+use Ups\Entity\ShipFrom;
+use Ups\Entity\Package;
+use Ups\Entity\PackagingType;
+use Ups\Entity\UnitOfMeasurement;
+use Ups\Entity\Dimensions;
 
 class UpsService implements ShippingServiceInterface
 {
@@ -51,7 +59,67 @@ class UpsService implements ShippingServiceInterface
 
         return $rules;
     }
-    public function returnJson($request)
+    public function returnData($request)
+    {
+        $user_id = env('UPS_USER_ID');
+        $user_password = env('UPS_USER_PASSWORD');
+        $access_key = env('UPS_ACCESS_KEY');
+
+        $rate = new Rate($access_key, $user_id, $user_password);
+
+        try {
+            $shipment = new Shipment;
+            $shipperAddress = $shipment->getShipper()->getAddress();
+            $shipperAddress->setPostalCode($request->item['origin']['postalCode']);
+
+            // OriginAddress
+            $originaddress = new Address;
+            $originaddress->setAddressLine1($request->item['origin']['streetAddress']);
+            $originaddress->setAddressLine2($request->item['origin']['alternateStreetAddress']);
+            $originaddress->setPostalCode($request->item['origin']['postalCode']);
+            $originaddress->setCity($request->item['origin']['majorMunicipality']);
+            $originaddress->setstateProvinceCode($request->item['origin']['stateProvince']);
+            $originaddress->setCountryCode($request->item['origin']['country']);
+            $originaddress->setStreetType($request->item['origin']['AddressType']);
+            $shipFrom = new ShipFrom;
+            $shipFrom->setAddress($originaddress);
+            $shipment->setShipFrom($shipFrom);
+
+            //Destination Address
+            $shipTo = $shipment->getShipTo();
+            $shipTo->setCompanyName($request->item['destination']['companyName']);
+            $shipToAddress = $shipTo->getAddress();
+            $shipToAddress->setPostalCode($request->item['destination']['postalCode']);
+            $shipToAddress->setCountryCode($request->item['destination']['country']);
+            $shipToAddress->setStreetType($request->item['destination']['AddressType']);
+
+            // multi package
+            for($i = 0; $i < $request->get('count'); $i++){
+                $package[$i] = new Package;
+                $package[$i]->getPackagingType()->setCode(PackagingType::PT_PACKAGE);
+                $package[$i]->getPackageWeight()->setWeight($request->items[$i]['lbs']);
+                $weightUnit = new UnitOfMeasurement;
+                $weightUnit->setCode(UnitOfMeasurement::UOM_LBS);
+                $package[$i]->getPackageWeight()->setUnitOfMeasurement($weightUnit);
+
+                $dimensions = new Dimensions;
+                $dimensions->setHeight($request->items[$i]['heightInMeters']);
+                $dimensions->setWidth($request->items[$i]['lbs']);
+                $dimensions->setLength($request->items[$i]['lengthInMeters']);
+                $unit = new UnitOfMeasurement;
+                $unit->setCode(UnitOfMeasurement::UOM_CM);
+                $dimensions->setUnitOfMeasurement($unit);
+                $package[$i]->setDimensions($dimensions);
+
+            }
+            $shipment->addPackage($package);
+            print_r($rate->getRate($shipment)); exit;
+
+        } catch (Exception $e){
+            print_r($e);
+        }
+    }
+    public function call($ups)
     {
 
     }
