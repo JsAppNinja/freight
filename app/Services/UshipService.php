@@ -40,7 +40,7 @@ class UshipService implements ShippingServiceInterface
         $rules['item.origin.companyName'] = 'required|string|max:255' ;
         $rules['item.origin.phoneNumber'] = 'required|string|max:255' ;
 
-        // destination Addres rules
+        // destination Address rules
 
         $rules['item.destination.postalCode'] = 'required|string|max:255' ;
         $rules['item.destination.country'] = 'required|string|max:255' ;
@@ -127,6 +127,8 @@ class UshipService implements ShippingServiceInterface
             $commodity[$i] = $request->items[$i]['Commodity'];
             $unitCount[$i] = $request->items[$i]['unitCount'];
             $packaging[$i] = $request->items[$i]['packaging'];
+            $lengthInMeters[$i] = $request->items[$i]['lengthInMeters'];
+            $heightInMeters[$i] = $request->items[$i]['heightInMeters'];
             $lbs[$i] = $request->items[$i]['lbs'];
             $freightClass[$i] = $request->items[$i]['freightClass'];
             $stackable[$i] = $request->items[$i]['stackable'];
@@ -160,7 +162,13 @@ class UshipService implements ShippingServiceInterface
             $items[$i]['unitCount'] = $unitCount[$i];
             $items[$i]['packaging'] = $packaging[$i];
             $items[$i]['lbs'] = $lbs[$i];
-            $items[$i]['freightClass'] = $freightClass[$i];
+            if($freightClass[$i] > 0) {
+                $items[$i]['freightClass'] = $freightClass[$i];                
+            }
+            else {
+                $items[$i]['lengthInMeters'] = $lengthInMeters[$i];
+                $items[$i]['heightInMeters'] = $heightInMeters[$i];
+            }
             $items[$i]['stackable'] = $stackable[$i];
             $items[$i]['hazardous'] = $hazardous[$i];
         }
@@ -243,6 +251,7 @@ class UshipService implements ShippingServiceInterface
             $response = curl_exec( $ch );
         }
         $result = json_decode($response);
+        var_dump($result); exit;
         return $result->price->value;
     }
 }
