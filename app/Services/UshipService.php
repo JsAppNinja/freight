@@ -246,13 +246,17 @@ class UshipService implements ShippingServiceInterface
         curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
         if(curl_exec($ch) === false)
         {
-            echo 'Curl error: ' . curl_error($ch); exit;
+            $error = '{"Curl error": "' . curl_error($ch).'"}';
+            return error; exit;
         }else {
-            $response = curl_exec( $ch );
+            try {
+                $response = curl_exec( $ch );
+                $result = json_decode($response);
+                return $result->price->value;
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
         }
-        $result = json_decode($response);
-        var_dump($result); exit;
-        return $result->price->value;
     }
 }
 ?>

@@ -161,7 +161,7 @@ class UpsService implements ShippingServiceInterface
             $TotalCharges = $ratedShipment[0]->TotalCharges;
             return $TotalCharges->MonetaryValue;
         } catch (Exception $e){
-            print_r($e); exit;
+            return $e->getMessage();
         }
     }
 }
