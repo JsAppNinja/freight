@@ -166,9 +166,35 @@
                             <fieldset>
                                 <legend>ShipTo:</legend>
                                 <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label>streetAddress:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input name="item[destination][streetAddress]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">alternateStreetAddress:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[destination][alternateStreetAddress]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">majorMunicipality:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[destination][majorMunicipality]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-md-4">postalCode:</label>
                                     <div class="col-md-8">
                                         <input name="item[destination][postalCode]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">stateProvince:</label>
+                                    <div class="col-md-8">
+                                        <input name="item[destination][stateProvince]" type="text" class="input"></input>
                                     </div>
                                 </div>
                                 <div class="form-group row">

@@ -152,7 +152,6 @@ class UpsService implements ShippingServiceInterface
         // RateRequest Object
         $rateRequest = new RateRequest;
         $rateRequest->setShipment($shipment);
-        // var_dump($shipment); exit;
 
         try {
             //Send Reqeust and Get Response

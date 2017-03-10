@@ -128,7 +128,7 @@ class UshipService implements ShippingServiceInterface
             $unitCount[$i] = $request->items[$i]['unitCount'];
             $packaging[$i] = $request->items[$i]['packaging'];
             $lengthInMeters[$i] = $request->items[$i]['lengthInMeters'];
-            $heightInMeters[$i] = $request->items[$i]['heightInMeters'];
+            $heightInMeters[$i] = $request-s>items[$i]['heightInMeters'];
             $lbs[$i] = $request->items[$i]['lbs'];
             $freightClass[$i] = $request->items[$i]['freightClass'];
             $stackable[$i] = $request->items[$i]['stackable'];
@@ -164,8 +164,7 @@ class UshipService implements ShippingServiceInterface
             $items[$i]['lbs'] = $lbs[$i];
             if($freightClass[$i] > 0) {
                 $items[$i]['freightClass'] = $freightClass[$i];                
-            }
-            else {
+            } else {
                 $items[$i]['lengthInMeters'] = $lengthInMeters[$i];
                 $items[$i]['heightInMeters'] = $heightInMeters[$i];
             }
@@ -210,8 +209,9 @@ class UshipService implements ShippingServiceInterface
         curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
         if(curl_exec($ch) === false)
         {
-            echo 'Curl error: ' . curl_error($ch); exit;
-        }else {
+            $error = '{"error": "' . curl_error($ch).'"}';
+            echo error; exit;
+        } else {
             $response = curl_exec( $ch );
         }
 
@@ -244,11 +244,10 @@ class UshipService implements ShippingServiceInterface
         curl_setopt( $ch, CURLOPT_HTTPHEADER,array('authorization: '.$authorization));
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
-        if(curl_exec($ch) === false)
-        {
-            $error = '{"Curl error": "' . curl_error($ch).'"}';
-            return error; exit;
-        }else {
+        if(curl_exec($ch) === false) {
+            $error = '{"error": "' . curl_error($ch).'"}';
+            echo error; exit;
+        } else {
             try {
                 $response = curl_exec( $ch );
                 $result = json_decode($response);
@@ -259,4 +258,5 @@ class UshipService implements ShippingServiceInterface
         }
     }
 }
+
 ?>
