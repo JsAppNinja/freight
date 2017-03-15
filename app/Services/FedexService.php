@@ -76,7 +76,7 @@ class FedexService implements ShippingServiceInterface
                 'Password' => getProperty('parentpassword')
             ),
             'UserCredential' => array(
-                'Key' => getProperty('key'), 
+                'Key' => getProperty('key'),
                 'Password' => getProperty('password')
             )
         ); 
@@ -104,7 +104,7 @@ class FedexService implements ShippingServiceInterface
         $request['RequestedShipment']['Recipient'] = addRecipient();
         $request['RequestedShipment']['ShippingChargesPayment'] = addShippingChargesPayment();
         $request['RequestedShipment']['PackageCount'] = '1';
-        // $request['RequestedShipment']['RequestedPackageLineItems'] = addPackageLineItem1();
+        // $request['RequestedShipment']['RequestedPackageLineItems'] = addPackageLineItem();
         $request['RequestedShipment']['RequestedPackageLineItems'] = addPackageLineItems();
 
 
@@ -200,7 +200,7 @@ class FedexService implements ShippingServiceInterface
                 'City' => $request->item['destination']['majorMunicipality'],
                 'StateOrProvinceCode' => $request->item['destination']['stateProvince'],
                 'PostalCode' => $request->item['destination']['postalCode'],
-                'CountryCode' => $request->item['destination']['country']
+                'CountryCode' => $request->item['destination']['country'],
                 'Residential' => false
             )
         );
@@ -257,22 +257,23 @@ class FedexService implements ShippingServiceInterface
         return $packageLineItem;
     }
     function addPackageLineItems(){
-    $packageLineItems = [];
-    for($i = 0; $i < $request->get('count'); $i++) {
-        $packageLineItems[i] = array(
-            'SequenceNumber'=>$i,
-            'GroupPackageCount'=>1,
-            'Weight' => array(
-                'Value' => $request->items[$i]['lbs'],
-                'Units' => 'LB'
-            ),
-            'Dimensions' => array(
-                'Length' => $request->items[$i]['lengthInMeters'],
-                'Width' => $request->items[$i]['widthInMeters'],
-                'Height' => $request->items[$i]['heightInMeters'],
-                'Units' => 'IN'
-            )
-        );
+        $packageLineItems = [];
+        for($i = 0; $i < $request->get('count'); $i++) {
+            $packageLineItems[i] = array(
+                'SequenceNumber'=>$i,
+                'GroupPackageCount'=>1,
+                'Weight' => array(
+                    'Value' => $request->items[$i]['lbs'],
+                    'Units' => 'LB'
+                ),
+                'Dimensions' => array(
+                    'Length' => $request->items[$i]['lengthInMeters'],
+                    'Width' => $request->items[$i]['widthInMeters'],
+                    'Height' => $request->items[$i]['heightInMeters'],
+                    'Units' => 'IN'
+                )
+            );
+        }
         return $packageLineItems;
     }    
 }

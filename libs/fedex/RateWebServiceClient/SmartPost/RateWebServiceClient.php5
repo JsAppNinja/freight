@@ -18,7 +18,7 @@ $request['WebAuthenticationDetail'] = array(
         'Key' => getProperty('parentkey'),
         'Password' => getProperty('parentpassword')
     ),
-    'UserCredential' =>array(
+    'UserCredential' => array(
         'Key' => getProperty('key'), 
         'Password' => getProperty('password')
     )
