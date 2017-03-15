@@ -44,18 +44,17 @@ class UpsService implements ShippingServiceInterface
         $rules['item.destination.postalCode'] = 'required|string|max:255';
         $rules['item.destination.country'] = 'required|string|max:255';
         $rules['item.destination.companyName'] = 'required|string|max:255';
+        $rules['item.destination.phoneNumber'] = 'required|string|max:255';
 
         // items rules
 
         for ($i = 0; $i < $count; $i++) {
             $rules['items.'.$i.'.Commodity'] = 'required|string|max:255';
             $rules['items.'.$i.'.unitCount'] = 'required|integer|max:50';
-            $rules['items.'.$i.'.packaging'] = 'required|string|max:255';
             $rules['items.'.$i.'.lengthInMeters'] = 'required|numeric';
             $rules['items.'.$i.'.widthInMeters'] = 'required|numeric';
             $rules['items.'.$i.'.heightInMeters'] = 'required|numeric';
             $rules['items.'.$i.'.lbs'] = 'required|numeric';
-            $rules['items.'.$i.'.handlingUnit'] = 'required|string|max:255';
         }
 
         return $rules;
@@ -126,9 +125,9 @@ class UpsService implements ShippingServiceInterface
                 $package->getPackageWeight()->setUnitOfMeasurement($weightUnit);
 
                 $dimensions = new Dimensions;
-                $dimensions->setHeight($request->items[$i]['heightInMeters']);
-                $dimensions->setWidth($request->items[$i]['widthInMeters']);
                 $dimensions->setLength($request->items[$i]['lengthInMeters']);
+                $dimensions->setWidth($request->items[$i]['widthInMeters']);
+                $dimensions->setHeight($request->items[$i]['heightInMeters']);
                 $unit = new UnitOfMeasurement;
                 $unit->setCode(UnitOfMeasurement::UOM_IN);
                 $dimensions->setUnitOfMeasurement($unit);

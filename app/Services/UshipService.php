@@ -46,16 +46,21 @@ class UshipService implements ShippingServiceInterface
         $rules['item.destination.country'] = 'required|string|max:255' ;
         $rules['item.destination.AddressType'] = 'required|string|max:255' ;
 
+        $rules['item.destination.name'] = 'required|string|max:255' ;
+        $rules['item.destination.companyName'] = 'required|string|max:255' ;
+        $rules['item.destination.phoneNumber'] = 'required|string|max:255' ;
+
         // items rules
 
         for ($i = 0; $i < $count; $i++) {
             $rules['items.'.$i.'.Commodity'] = 'required|string|max:255';
             $rules['items.'.$i.'.unitCount'] = 'required|integer|max:50';
             $rules['items.'.$i.'.packaging'] = 'required|string|max:255';
-            $rules['items.'.$i.'.lengthInMeters'] = 'required|numeric';
-            $rules['items.'.$i.'.heightInMeters'] = 'required|numeric';
+            $rules['items.'.$i.'.lengthInMeters'] = 'required_without:'.'items.'.$i.'.freightClass';
+            $rules['items.'.$i.'.heightInMeters'] = 'required_with:'.'items.'.$i.'.lengthInMeters';
             $rules['items.'.$i.'.lbs'] = 'required|numeric';
-            $rules['items.'.$i.'.freightClass'] = 'required|numeric';
+            // $rules['items.'.$i.'.freightClass'] = 'required|numeric';
+            $rules['items.'.$i.'.freightClass'] = 'required_without:'.'items.'.$i.'.lengthInMeters';
             $rules['items.'.$i.'.handlingUnit'] = 'required|string|max:255';
         }
 
@@ -128,11 +133,12 @@ class UshipService implements ShippingServiceInterface
             $unitCount[$i] = $request->items[$i]['unitCount'];
             $packaging[$i] = $request->items[$i]['packaging'];
             $lengthInMeters[$i] = $request->items[$i]['lengthInMeters'];
-            $heightInMeters[$i] = $request-s>items[$i]['heightInMeters'];
+            $heightInMeters[$i] = $request->items[$i]['heightInMeters'];
             $lbs[$i] = $request->items[$i]['lbs'];
             $freightClass[$i] = $request->items[$i]['freightClass'];
             $stackable[$i] = $request->items[$i]['stackable'];
             $hazardous[$i] = $request->items[$i]['hazardous'];
+            $handlingUnit[$i] = $request->items[$i]['handlingUnit'];
         }
 
         //Attributes
@@ -170,6 +176,7 @@ class UshipService implements ShippingServiceInterface
             }
             $items[$i]['stackable'] = $stackable[$i];
             $items[$i]['hazardous'] = $hazardous[$i];
+            $items[$i]['handlingUnit'] = $handlingUnit[$i];
         }
 
         // Attributs Array
@@ -236,6 +243,9 @@ class UshipService implements ShippingServiceInterface
         $authorization = "Bearer ".$access_token;
 
         $uship_endpoint_url = "https://api.uship.com/v2/estimate";
+        // $uship_endpoint_url = "https://api.uship.com/v2/rateRequests/";
+
+
         $ch = curl_init( $uship_endpoint_url );
         curl_setopt( $ch, CURLOPT_POST, 1);
         curl_setopt( $ch, CURLOPT_POSTFIELDS, $uship);
@@ -250,8 +260,8 @@ class UshipService implements ShippingServiceInterface
         } else {
             try {
                 $response = curl_exec( $ch );
-                $result = json_decode($response);
-                return $result->price->value;
+                $result = json_decode($response); 
+                return $result->price->value;;
             } catch (Exception $e) {
                 return $e->getMessage();
             }
