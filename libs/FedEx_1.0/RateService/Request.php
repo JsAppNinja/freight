@@ -1,6 +1,6 @@
 <?php
 namespace FedEx\RateService;
-    
+
 use FedEx\AbstractRequest;
 
 /**
@@ -39,7 +39,16 @@ class Request extends AbstractRequest
             $this->_wsdlPath = realpath(dirname(__FILE__) . '/../_wsdl/RateService_v10.wsdl');
         }
 
-        $this->_soapClient = new \SoapClient($this->_wsdlPath, array('trace' => true));
+        // $this->_soapClient = new \SoapClient($this->_wsdlPath, array('trace' => true));
+
+        $this->_soapClient = new \SoapClient ( $this->_wsdlPath , array(
+        //'trace' => 1,
+        'stream_context'=> stream_context_create(array('ssl'=> array(
+            'verify_peer'=>false,
+            'verify_peer_name'=>false,
+            'allow_self_signed' => true //can fiddle with this one.
+          )))
+        ));
     }
 
     /**
@@ -55,15 +64,13 @@ class Request extends AbstractRequest
     /**
      * Sends the RateRequest and returns the response
      *
-     * @param ComplexType\RateRequest $rateRequest 
+     * @param ComplexType\RateRequest $rateRequest
      * @return stdClass
      */
     public function getGetRatesReply(ComplexType\RateRequest $rateRequest)
     {
         return $this->_soapClient->getRates($rateRequest->toArray());
     }
-   
+
 
 }
-
-   

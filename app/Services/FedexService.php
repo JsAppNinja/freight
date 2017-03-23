@@ -9,15 +9,7 @@ namespace App\Services;
 use App\Contracts\ShippingServiceInterface;
 use SoapClient;
 
-// use FedEx\ShipService,
-//     FedEx\ShipService\ComplexType,
-//     FedEx\ShipService\SimpleType;
-    
-use FedEx\RateService;
-use FedEx\RateService\ComplexType;
-use FedEx\RateService\SimpleType;
-
-// require_once('../libs/fedex/library/fedex-common.php5');
+require_once('../libs/fedex/library/fedex-common.php5');
 
 class FedexService implements ShippingServiceInterface
 {
@@ -67,195 +59,110 @@ class FedexService implements ShippingServiceInterface
 
     public function returnData($request)
     {
-        // $fedex['WebAuthenticationDetail'] = array(
-        //     // 'ParentCredential' => array(
-        //     //     'Key' => getProperty('parentkey'),
-        //     //     'Password' => getProperty('parentpassword')
-        //     // ),
-        //     'UserCredential' => array(
-        //         'Key' => getProperty('key'),
-        //         'Password' => getProperty('password')
-        //     )
-        // ); 
-        // $fedex['ClientDetail'] = array(
-        //     'AccountNumber' => getProperty('shipaccount'),
-        //     'MeterNumber' => getProperty('meter')
-        // );
-        // $fedex['TransactionDetail'] = array('CustomerTransactionId' => ' *** Rate Request using PHP ***');
-        // $fedex['Version'] = array(
-        //     'ServiceId' => 'crs', 
-        //     'Major' => '20', 
-        //     'Intermediate' => '0', 
-        //     'Minor' => '0'
-        // );
-        // $fedex['ReturnTransitAndCommit'] = true;
-        // $fedex['RequestedShipment']['DropoffType'] = 'REGULAR_PICKUP'; // valid values REGULAR_PICKUP, REQUEST_COURIER, ...
-        // $fedex['RequestedShipment']['ShipTimestamp'] = date('c');
-        // $fedex['RequestedShipment']['ServiceType'] = 'INTERNATIONAL_PRIORITY'; // valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, ...
-        // $fedex['RequestedShipment']['PackagingType'] = 'YOUR_PACKAGING'; // valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING, ...
-        // $fedex['RequestedShipment']['TotalInsuredValue']=array(
-        //     'Ammount'=>100,
-        //     'Currency'=>'USD'
-        // );
-        // $fedex['RequestedShipment']['Shipper'] = $this->addShipper($request);
-        // $fedex['RequestedShipment']['Recipient'] = $this->addRecipient($request);
-        // $fedex['RequestedShipment']['ShippingChargesPayment'] = $this->addShippingChargesPayment($request);
-        // $fedex['RequestedShipment']['PackageCount'] = '1';
-        // // $request['RequestedShipment']['RequestedPackageLineItems'] = addPackageLineItems($request);
-        // $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItem($request);
+        $fedex['WebAuthenticationDetail'] = array(
+            // 'ParentCredential' => array(
+            //     'Key' => getProperty('parentkey'),
+            //     'Password' => getProperty('parentpassword')
+            // ),
+            'UserCredential' => array(
+                'Key' => getProperty('key'),
+                'Password' => getProperty('password')
+            )
+        );
+        $fedex['ClientDetail'] = array(
+            'AccountNumber' => getProperty('shipaccount'),
+            'MeterNumber' => getProperty('meter')
+        );
+        $fedex['TransactionDetail'] = array('CustomerTransactionId' => ' *** Rate Request using PHP ***');
+        $fedex['Version'] = array(
+            'ServiceId' => 'crs',
+            'Major' => '20',
+            'Intermediate' => '0',
+            'Minor' => '0'
+        );
+        $fedex['ReturnTransitAndCommit'] = true;
+        $fedex['RequestedShipment']['DropoffType'] = 'REGULAR_PICKUP'; // valid values REGULAR_PICKUP, REQUEST_COURIER, ...
+        $fedex['RequestedShipment']['ShipTimestamp'] = date('c');
+        $fedex['RequestedShipment']['ServiceType'] = 'INTERNATIONAL_PRIORITY'; // valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, ...
+        $fedex['RequestedShipment']['PackagingType'] = 'YOUR_PACKAGING'; // valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING, ...
+        $fedex['RequestedShipment']['TotalInsuredValue']=array(
+            'Ammount'=>100,
+            'Currency'=>'USD'
+        );
+        $fedex['RequestedShipment']['Shipper'] = $this->addShipper($request);
+        $fedex['RequestedShipment']['Recipient'] = $this->addRecipient($request);
+        $fedex['RequestedShipment']['ShippingChargesPayment'] = $this->addShippingChargesPayment($request);
+        $fedex['RequestedShipment']['PackageCount'] = '1';
+        // $request['RequestedShipment']['RequestedPackageLineItems'] = addPackageLineItems($request);
+        $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItem($request);
 
-        // return $fedex;
+        return $fedex;
     }
 
     public function call($fedex){
 
-        $rateRequest = new ComplexType\RateRequest();
-        //UserCredential
-        $userCredential = new ComplexType\WebAuthenticationCredential();
-        $userCredential
-            ->setKey('1HV9OgrPBoxJC51Y')
-            ->setPassword('Jas1ChHUN9ZTBMH3akbIJQgKQ');
+        $newline = "<br />";
+        //The WSDL is not included with the sample code.
+        //Please include and reference in $path_to_wsdl variable.
+        // $path_to_wsdl = "http://localhost:8080/wsdl/RateService_v20.wsdl";
+        $path_to_wsdl = "../libs/fedex/wsdl/RateService_v20.wsdl";
 
         ini_set("soap.wsdl_cache_enabled", "0");
         ini_set('soap.wsdl_cache_ttl',0);
 
-        //WebAuthenticationDetail
-        $webAuthenticationDetail = new ComplexType\WebAuthenticationDetail();
-        $webAuthenticationDetail->setUserCredential($userCredential);
+        $client = new SoapClient ( $path_to_wsdl , array(
+            //'trace' => 1,
+            'stream_context'=> stream_context_create(array('ssl'=> array(
+                'verify_peer'=>false,
+                'verify_peer_name'=>false,
+                'allow_self_signed' => true //can fiddle with this one.
+            )))
+        ));
 
-        $rateRequest->setWebAuthenticationDetail($webAuthenticationDetail);
+        // $client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
 
-        //ClientDetail
-        $clientDetail = new ComplexType\ClientDetail();
-        $clientDetail
-            ->setAccountNumber('510087500')
-            ->setMeterNumber('118789971');
+        try {
+            if(setEndpoint('changeEndpoint')){
+                $newLocation = $client->__setLocation(setEndpoint('endpoint'));
+            }
 
-        $rateRequest->setClientDetail($clientDetail);
+            $response = $client -> getRates($fedex);
+            // var_dump($response); exit;
 
-        //TransactionDetail
-        $transactionDetail = new ComplexType\TransactionDetail();
-        $transactionDetail->setCustomerTransactionId('Testing Rate Service request');
-
-        $rateRequest->setTransactionDetail($transactionDetail);
-
-        //VersionId
-        $versionId = new ComplexType\VersionId();
-        $versionId
-            ->setServiceId('crs')
-            ->setMajor(10)
-            ->setIntermediate(0)
-            ->setMinor(0);
-
-        $rateRequest->setVersion($versionId);
-
-        //OPTIONAL ReturnTransitAndCommit
-        $rateRequest->setReturnTransitAndCommit(true);
-
-        //RequestedShipment
-        $requestedShipment = new ComplexType\RequestedShipment();
-        $requestedShipment->setDropoffType(SimpleType\DropoffType::_REGULAR_PICKUP);
-        $requestedShipment->setShipTimestamp(date('c'));
-
-        $rateRequest->setRequestedShipment($requestedShipment);
-
-        //RequestedShipment/Shipper
-        $shipper = new ComplexType\Party();
-
-        $shipperAddress = new ComplexType\Address();
-        $shipperAddress
-            ->setStreetLines(array('10 Fed Ex Pkwy'))
-            ->setCity('Memphis')
-            ->setStateOrProvinceCode('TN')
-            ->setPostalCode(38115)
-            ->setCountryCode('US');
-
-        $shipper->setAddress($shipperAddress);
-
-        $requestedShipment->setShipper($shipper);
-
-        //RequestedShipment/Recipient
-        $recipient = new ComplexType\Party();
-
-        $recipientAddress = new ComplexType\Address();
-        $recipientAddress
-            ->setStreetLines(array('13450 Farmcrest Ct'))
-            ->setCity('Herndon')
-            ->setStateOrProvinceCode('VA')
-            ->setPostalCode(20171)
-            ->setCountryCode('US');
-
-        $recipient->setAddress($recipientAddress);
-
-        $requestedShipment->setRecipient($recipient);
-
-        //RequestedShipment/ShippingChargesPayment
-        $shippingChargesPayment = new ComplexType\Payment();
-        $shippingChargesPayment->setPaymentType(SimpleType\PaymentType::_SENDER);
-
-        $payor = new ComplexType\Payor();
-        $payor
-            ->setAccountNumber('510087500')
-            ->setCountryCode('US');
-
-        $shippingChargesPayment->setPayor($payor);
-
-        $requestedShipment->setShippingChargesPayment($shippingChargesPayment);
-
-        //RequestedShipment/RateRequestType(s)
-        $requestedShipment->setRateRequestTypes([
-            SimpleType\RateRequestType::_LIST,
-            SimpleType\RateRequestType::_ACCOUNT
-        ]);
-
-        //RequestedShipment/PackageCount
-        $requestedShipment->setPackageCount(2);
-
-        //RequestedShipment/RequestedPackageLineItem(s)
-        $item1Weight = new ComplexType\Weight();
-        $item1Weight
-            ->setUnits(SimpleType\WeightUnits::_LB)
-            ->setValue(2.0);
-
-        $item1Dimensions = new ComplexType\Dimensions();
-        $item1Dimensions
-            ->setLength(10)
-            ->setWidth(10)
-            ->setHeight(3)
-            ->setUnits(SimpleType\LinearUnits::_IN);
-
-        $item1 = new ComplexType\RequestedPackageLineItem();
-        $item1
-            ->setWeight($item1Weight)
-            ->setDimensions($item1Dimensions)
-            ->setGroupPackageCount(1);
-
-        $item2Weight = new ComplexType\Weight();
-        $item2Weight
-            ->setUnits(SimpleType\WeightUnits::_LB)
-            ->setValue(5.0);
-
-        $item2Dimensions = new ComplexType\Dimensions();
-        $item2Dimensions
-            ->setLength(20)
-            ->setWidth(20)
-            ->setHeight(10)
-            ->setUnits(SimpleType\LinearUnits::_IN);
-
-        $item2 = new ComplexType\RequestedPackageLineItem();
-        $item2
-            ->setWeight($item2Weight)
-            ->setDimensions($item2Dimensions)
-            ->setGroupPackageCount(1);
-
-        $requestedShipment->setRequestedPackageLineItems([$item1, $item2]);
-
-        $rateRequest->setRequestedShipment($requestedShipment);
-
-        $rateServiceRequest = new RateService\Request();
-        $response = $rateServiceRequest->getGetRatesReply($rateRequest);
-
-        var_dump($response);
+            if ($response -> HighestSeverity != 'FAILURE' && $response -> HighestSeverity != 'ERROR'){
+                $rateReply = $response -> RateReplyDetails;
+                // echo '<table border="1">';
+                // echo '<tr><td>Service Type</td><td>Amount</td><td>Delivery Date</td></tr><tr>';
+                // $serviceType = '<td>'.$rateReply -> ServiceType . '</td>';
+                // if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)){
+                //     $amount = '<td>$' . number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",") . '</td>';
+                // }elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)){
+                //     $amount = '<td>$' . number_format($rateReply->RatedShipmentDetails->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",") . '</td>';
+                // }
+                // if(array_key_exists('DeliveryTimestamp',$rateReply)){
+                //     $deliveryDate= '<td>' . $rateReply->DeliveryTimestamp . '</td>';
+                // }else if(array_key_exists('TransitTime',$rateReply)){
+                //     $deliveryDate= '<td>' . $rateReply->TransitTime . '</td>';
+                // }else {
+                //     $deliveryDate='<td>&nbsp;</td>';
+                // }
+                // echo $serviceType . $amount. $deliveryDate;
+                // echo '</tr>';
+                // echo '</table>';
+                // printSuccess($client, $response);
+                if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)){
+                    $amount = number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",");
+                }elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)){
+                    $amount = number_format($rateReply->RatedShipmentDetails->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",");
+                }
+                return $amount;
+            }else{
+                printError($client, $response);
+            }
+            // writeToLog($client);    // Write to log file
+        } catch (SoapFault $exception) {
+           printFault($exception, $client);
+        }
 
 
     }
@@ -274,7 +181,7 @@ class FedexService implements ShippingServiceInterface
                 'PostalCode' => $request->item['origin']['postalCode'],
                 'CountryCode' => $request->item['origin']['country']
             )
-        );      
+        );
         return $shipper;
     }
     function addRecipient($request){
@@ -301,7 +208,7 @@ class FedexService implements ShippingServiceInterface
             //     'Residential' => false
             // )
         );
-        return $recipient;                                      
+        return $recipient;
     }
     function addShippingChargesPayment(){
         $shippingChargesPayment = array(
@@ -328,13 +235,13 @@ class FedexService implements ShippingServiceInterface
             'SpecialServiceTypes' => array('COD'),
             'CodDetail' => array(
                 'CodCollectionAmount' => array(
-                    'Currency' => 'USD', 
+                    'Currency' => 'USD',
                     'Amount' => 150
                 ),
                 'CollectionType' => 'ANY' // ANY, GUARANTEED_FUNDS
             )
         );
-        return $specialServices; 
+        return $specialServices;
     }
     function addPackageLineItem($request){
         $packageLineItem = array(
@@ -372,7 +279,7 @@ class FedexService implements ShippingServiceInterface
             );
         }
         return $packageLineItems;
-    }    
+    }
 }
 
 ?>
