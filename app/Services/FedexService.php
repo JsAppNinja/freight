@@ -17,7 +17,7 @@ use FedEx\RateService;
 use FedEx\RateService\ComplexType;
 use FedEx\RateService\SimpleType;
 
-require_once('../libs/fedex/library/fedex-common.php5');
+// require_once('../libs/fedex/library/fedex-common.php5');
 
 class FedexService implements ShippingServiceInterface
 {
@@ -67,44 +67,44 @@ class FedexService implements ShippingServiceInterface
 
     public function returnData($request)
     {
-        $fedex['WebAuthenticationDetail'] = array(
-            // 'ParentCredential' => array(
-            //     'Key' => getProperty('parentkey'),
-            //     'Password' => getProperty('parentpassword')
-            // ),
-            'UserCredential' => array(
-                'Key' => getProperty('key'),
-                'Password' => getProperty('password')
-            )
-        ); 
-        $fedex['ClientDetail'] = array(
-            'AccountNumber' => getProperty('shipaccount'),
-            'MeterNumber' => getProperty('meter')
-        );
-        $fedex['TransactionDetail'] = array('CustomerTransactionId' => ' *** Rate Request using PHP ***');
-        $fedex['Version'] = array(
-            'ServiceId' => 'crs', 
-            'Major' => '20', 
-            'Intermediate' => '0', 
-            'Minor' => '0'
-        );
-        $fedex['ReturnTransitAndCommit'] = true;
-        $fedex['RequestedShipment']['DropoffType'] = 'REGULAR_PICKUP'; // valid values REGULAR_PICKUP, REQUEST_COURIER, ...
-        $fedex['RequestedShipment']['ShipTimestamp'] = date('c');
-        $fedex['RequestedShipment']['ServiceType'] = 'INTERNATIONAL_PRIORITY'; // valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, ...
-        $fedex['RequestedShipment']['PackagingType'] = 'YOUR_PACKAGING'; // valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING, ...
-        $fedex['RequestedShipment']['TotalInsuredValue']=array(
-            'Ammount'=>100,
-            'Currency'=>'USD'
-        );
-        $fedex['RequestedShipment']['Shipper'] = $this->addShipper($request);
-        $fedex['RequestedShipment']['Recipient'] = $this->addRecipient($request);
-        $fedex['RequestedShipment']['ShippingChargesPayment'] = $this->addShippingChargesPayment($request);
-        $fedex['RequestedShipment']['PackageCount'] = '1';
-        // $request['RequestedShipment']['RequestedPackageLineItems'] = addPackageLineItems($request);
-        $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItem($request);
+        // $fedex['WebAuthenticationDetail'] = array(
+        //     // 'ParentCredential' => array(
+        //     //     'Key' => getProperty('parentkey'),
+        //     //     'Password' => getProperty('parentpassword')
+        //     // ),
+        //     'UserCredential' => array(
+        //         'Key' => getProperty('key'),
+        //         'Password' => getProperty('password')
+        //     )
+        // ); 
+        // $fedex['ClientDetail'] = array(
+        //     'AccountNumber' => getProperty('shipaccount'),
+        //     'MeterNumber' => getProperty('meter')
+        // );
+        // $fedex['TransactionDetail'] = array('CustomerTransactionId' => ' *** Rate Request using PHP ***');
+        // $fedex['Version'] = array(
+        //     'ServiceId' => 'crs', 
+        //     'Major' => '20', 
+        //     'Intermediate' => '0', 
+        //     'Minor' => '0'
+        // );
+        // $fedex['ReturnTransitAndCommit'] = true;
+        // $fedex['RequestedShipment']['DropoffType'] = 'REGULAR_PICKUP'; // valid values REGULAR_PICKUP, REQUEST_COURIER, ...
+        // $fedex['RequestedShipment']['ShipTimestamp'] = date('c');
+        // $fedex['RequestedShipment']['ServiceType'] = 'INTERNATIONAL_PRIORITY'; // valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, ...
+        // $fedex['RequestedShipment']['PackagingType'] = 'YOUR_PACKAGING'; // valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING, ...
+        // $fedex['RequestedShipment']['TotalInsuredValue']=array(
+        //     'Ammount'=>100,
+        //     'Currency'=>'USD'
+        // );
+        // $fedex['RequestedShipment']['Shipper'] = $this->addShipper($request);
+        // $fedex['RequestedShipment']['Recipient'] = $this->addRecipient($request);
+        // $fedex['RequestedShipment']['ShippingChargesPayment'] = $this->addShippingChargesPayment($request);
+        // $fedex['RequestedShipment']['PackageCount'] = '1';
+        // // $request['RequestedShipment']['RequestedPackageLineItems'] = addPackageLineItems($request);
+        // $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItem($request);
 
-        return $fedex;
+        // return $fedex;
     }
 
     public function call($fedex){
