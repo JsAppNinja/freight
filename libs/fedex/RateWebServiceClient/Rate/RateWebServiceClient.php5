@@ -10,7 +10,7 @@ $newline = "<br />";
 $path_to_wsdl = "../../wsdl/RateService_v20.wsdl";
 
 ini_set("soap.wsdl_cache_enabled", "0");
- 
+
 $client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
 
 $request['WebAuthenticationDetail'] = array(
@@ -19,19 +19,19 @@ $request['WebAuthenticationDetail'] = array(
 		'Password' => getProperty('parentpassword')
 	),
 	'UserCredential' => array(
-		'Key' => getProperty('key'), 
+		'Key' => getProperty('key'),
 		'Password' => getProperty('password')
 	)
-); 
+);
 $request['ClientDetail'] = array(
-	'AccountNumber' => getProperty('shipaccount'), 
+	'AccountNumber' => getProperty('shipaccount'),
 	'MeterNumber' => getProperty('meter')
 );
 $request['TransactionDetail'] = array('CustomerTransactionId' => ' *** Rate Request using PHP ***');
 $request['Version'] = array(
-	'ServiceId' => 'crs', 
-	'Major' => '20', 
-	'Intermediate' => '0', 
+	'ServiceId' => 'crs',
+	'Major' => '20',
+	'Intermediate' => '0',
 	'Minor' => '0'
 );
 $request['ReturnTransitAndCommit'] = true;
@@ -55,10 +55,10 @@ try {
 	if(setEndpoint('changeEndpoint')){
 		$newLocation = $client->__setLocation(setEndpoint('endpoint'));
 	}
-	
+
 	$response = $client -> getRates($request);
-        
-    if ($response -> HighestSeverity != 'FAILURE' && $response -> HighestSeverity != 'ERROR'){  	
+
+    if ($response -> HighestSeverity != 'FAILURE' && $response -> HighestSeverity != 'ERROR'){
     	$rateReply = $response -> RateReplyDetails;
     	echo '<table border="1">';
         echo '<tr><td>Service Type</td><td>Amount</td><td>Delivery Date</td></tr><tr>';
@@ -78,14 +78,14 @@ try {
         echo $serviceType . $amount. $deliveryDate;
         echo '</tr>';
         echo '</table>';
-        
+
         printSuccess($client, $response);
     }else{
         printError($client, $response);
-    } 
-    writeToLog($client);    // Write to log file   
+    }
+    writeToLog($client);    // Write to log file
 } catch (SoapFault $exception) {
-   printFault($exception, $client);        
+   printFault($exception, $client);
 }
 
 
@@ -123,7 +123,7 @@ function addRecipient(){
 			'Residential' => false
 		)
 	);
-	return $recipient;	                                    
+	return $recipient;
 }
 function addShippingChargesPayment(){
 	$shippingChargesPayment = array(
@@ -150,13 +150,13 @@ function addSpecialServices(){
 		'SpecialServiceTypes' => array('COD'),
 		'CodDetail' => array(
 			'CodCollectionAmount' => array(
-				'Currency' => 'USD', 
+				'Currency' => 'USD',
 				'Amount' => 150
 			),
 			'CollectionType' => 'ANY' // ANY, GUARANTEED_FUNDS
 		)
 	);
-	return $specialServices; 
+	return $specialServices;
 }
 function addPackageLineItem1(){
 	$packageLineItem = array(

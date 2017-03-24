@@ -93,7 +93,7 @@ class FedexService implements ShippingServiceInterface
         $fedex['RequestedShipment']['Recipient'] = $this->addRecipient($request);
         $fedex['RequestedShipment']['ShippingChargesPayment'] = $this->addShippingChargesPayment($request);
         $fedex['RequestedShipment']['PackageCount'] = '1';
-        // $request['RequestedShipment']['RequestedPackageLineItems'] = addPackageLineItems($request);
+        // $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItems($request);
         $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItem($request);
 
         return $fedex;
@@ -191,22 +191,23 @@ class FedexService implements ShippingServiceInterface
                 'CompanyName' => $request->item['destination']['companyName'],
                 'PhoneNumber' => $request->item['destination']['phoneNumber']
             ),
-            'Address' => array(
-                'StreetLines' => array('Address Line 1'),
-                'City' => 'Richmond',
-                'StateOrProvinceCode' => 'BC',
-                'PostalCode' => 'V7C4V4',
-                'CountryCode' => 'CA',
-                'Residential' => false
-            )
+
             // 'Address' => array(
-            //     'StreetLines' => array($request->item['destination']['streetAddress']),
-            //     'City' => $request->item['destination']['majorMunicipality'],
-            //     'StateOrProvinceCode' => $request->item['destination']['stateProvince'],
-            //     'PostalCode' => $request->item['destination']['postalCode'],
-            //     'CountryCode' => $request->item['destination']['country'],
+            //     'StreetLines' => array('73 Canberra Ave'),
+            //     'City' => 'Kingston',
+            //     'StateOrProvinceCode' => 'AC',
+            //     'PostalCode' => '2603',
+            //     'CountryCode' => 'AU',
             //     'Residential' => false
             // )
+            'Address' => array(
+                'StreetLines' => array($request->item['destination']['streetAddress']),
+                'City' => $request->item['destination']['majorMunicipality'],
+                'StateOrProvinceCode' => $request->item['destination']['stateProvince'],
+                'PostalCode' => $request->item['destination']['postalCode'],
+                'CountryCode' => $request->item['destination']['country'],
+                'Residential' => false
+            )
         );
         return $recipient;
     }

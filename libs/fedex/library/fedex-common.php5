@@ -24,9 +24,9 @@ function printReply($client, $response){
 
 function printRequestResponse($client){
     echo '<h2>Request</h2>' . "\n";
-    echo '<pre>' . htmlspecialchars($client->__getLastRequest()). '</pre>';  
+    echo '<pre>' . htmlspecialchars($client->__getLastRequest()). '</pre>';
     echo "\n";
-   
+
     echo '<h2>Response</h2>'. "\n";
     echo '<pre>' . htmlspecialchars($client->__getLastResponse()). '</pre>';
     echo "\n";
@@ -34,22 +34,22 @@ function printRequestResponse($client){
 
 /**
  *  Print SOAP Fault
- */  
+ */
 function printFault($exception, $client) {
-   echo '<h2>Fault</h2>' . "<br>\n";                        
+   echo '<h2>Fault</h2>' . "<br>\n";
    echo "<b>Code:</b>{$exception->faultcode}<br>\n";
    echo "<b>String:</b>{$exception->faultstring}<br>\n";
    writeToLog($client);
-    
+
   echo '<h2>Request</h2>' . "\n";
-    echo '<pre>' . htmlspecialchars($client->__getLastRequest()). '</pre>';  
+    echo '<pre>' . htmlspecialchars($client->__getLastRequest()). '</pre>';
     echo "\n";
 }
 
 /**
  * SOAP request/response logging to a file
- */                                  
-function writeToLog($client){  
+ */
+function writeToLog($client){
 
   /**
      * __DIR__ refers to the directory path of the library file.
@@ -70,26 +70,26 @@ function writeToLog($client){
  */
 function getProperty($var){
 
-    if($var == 'parentkey') Return 'starinit'; 
-    if($var == 'parentpassword') Return 'Smi4127IT'; 
-    if($var == 'key') Return '1HV9OgrPBoxJC51Y'; 
-    if($var == 'password') Return 'Jas1ChHUN9ZTBMH3akbIJQgKQ'; 
+    if($var == 'parentkey') Return 'starinit';
+    if($var == 'parentpassword') Return 'Smi4127IT';
+    if($var == 'key') Return '1HV9OgrPBoxJC51Y';
+    if($var == 'password') Return 'Jas1ChHUN9ZTBMH3akbIJQgKQ';
     if($var == 'shipaccount') Return '510087500';
     if($var == 'billaccount') Return '510087500';
-    if($var == 'dutyaccount') Return '510087500'; 
-    if($var == 'freightaccount') Return '510087020';  
-    if($var == 'trackaccount') Return 'XXX';    
-    if($var == 'dutiesaccount') Return 'XXX';
-    if($var == 'importeraccount') Return 'XXX';
-    if($var == 'brokeraccount') Return 'XXX';
-    if($var == 'distributionaccount') Return 'XXX';
+    if($var == 'dutyaccount') Return '510087500';
+    if($var == 'freightaccount') Return '510087020';
+    if($var == 'trackaccount') Return '510051408';
+    if($var == 'dutiesaccount') Return '510051408';
+    if($var == 'importeraccount') Return '510051408';
+    if($var == 'brokeraccount') Return '510051408';
+    if($var == 'distributionaccount') Return '510051408';
     if($var == 'locationid') Return 'PLBA';
     if($var == 'printlabels') Return true;
     if($var == 'printdocuments') Return true;
     if($var == 'packagecount') Return '4';
-    if($var == 'validateaccount') Return 'XXX';
+    if($var == 'validateaccount') Return '510087500';
     if($var == 'meter') Return '118789971';
-        
+
     if($var == 'shiptimestamp') Return mktime(10, 0, 0, date("m"), date("d")+1, date("Y"));
 
     if($var == 'spodshipdate') Return '2016-04-13';
@@ -106,19 +106,19 @@ function getProperty($var){
 
     if($var == 'dispatchdate') Return date("Y-m-d", mktime(8, 0, 0, date("m")  , date("d")+1, date("Y")));
     if($var == 'dispatchlocationid') Return 'NQAA';
-    if($var == 'dispatchconfirmationnumber') Return '4';        
-    
+    if($var == 'dispatchconfirmationnumber') Return '4';
+
     if($var == 'tag_readytimestamp') Return mktime(10, 0, 0, date("m"), date("d")+1, date("Y"));
-    if($var == 'tag_latesttimestamp') Return mktime(20, 0, 0, date("m"), date("d")+1, date("Y"));   
+    if($var == 'tag_latesttimestamp') Return mktime(20, 0, 0, date("m"), date("d")+1, date("Y"));
 
     if($var == 'expirationdate') Return date("Y-m-d", mktime(8, 0, 0, date("m"), date("d")+15, date("Y")));
     if($var == 'begindate') Return '2014-10-16';
-    if($var == 'enddate') Return '2014-10-16';  
+    if($var == 'enddate') Return '2014-10-16';
 
     if($var == 'trackingnumber') Return 'XXX';
 
     if($var == 'hubid') Return '5531';
-    
+
     if($var == 'jobid') Return 'XXX';
 
     if($var == 'searchlocationphonenumber') Return '5555555555';
@@ -153,7 +153,7 @@ function getProperty($var){
             'CountryCode' => 'US',
             'Residential' => 1
         )
-    );  
+    );
 
     if($var == 'address1') Return array(
         'StreetLines' => array('10 Fed Ex Pkwy'),
@@ -168,7 +168,7 @@ function getProperty($var){
         'StateOrProvinceCode' => 'VA',
         'PostalCode' => '20171',
         'CountryCode' => 'US'
-    );                    
+    );
     if($var == 'searchlocationsaddress') Return array(
         'StreetLines'=> array('240 Central Park S'),
         'City'=>'Austin',
@@ -176,7 +176,7 @@ function getProperty($var){
         'PostalCode'=>'78701',
         'CountryCode'=>'US'
     );
-                                      
+
     if($var == 'shippingchargespayment') Return array(
         'PaymentType' => 'SENDER',
         'Payor' => array(
@@ -186,7 +186,7 @@ function getProperty($var){
                 'Address' => array('CountryCode' => 'US')
             )
         )
-    );  
+    );
     if($var == 'freightbilling') Return array(
         'Contact'=>array(
             'ContactId' => 'freight1',
@@ -197,7 +197,7 @@ function getProperty($var){
         ),
         'Address'=>array(
             'StreetLines'=>array(
-                '1202 Chalet Ln', 
+                '1202 Chalet Ln',
                 'Do Not Delete - Test Account'
             ),
             'City' =>'Harrison',
