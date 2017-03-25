@@ -39,7 +39,7 @@ class HomeController extends Controller
         $this->validate($request,$rules);
         $shippingData = $this->shippingService->returnData($request);
         $price = $this->shippingService->call($shippingData);
-        if(is_numeric($price)) {
+        if(floatval($price) > 0) {
             return response()->json(['price' => $price], 200);
         }
         else {

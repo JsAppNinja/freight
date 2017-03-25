@@ -7,11 +7,13 @@
 define('Newline',"<br />");
 
 
-function printSuccess($client, $response) {
+function printSuccess($client, $response)
+{
     printReply($client, $response);
 }
 
-function printReply($client, $response){
+function printReply($client, $response)
+{
     $highestSeverity=$response->HighestSeverity;
     if($highestSeverity=="SUCCESS"){echo '<h2>The transaction was successful.</h2>';}
     if($highestSeverity=="WARNING"){echo '<h2>The transaction returned a warning.</h2>';}
@@ -22,7 +24,8 @@ function printReply($client, $response){
     printRequestResponse($client, $response);
 }
 
-function printRequestResponse($client){
+function printRequestResponse($client)
+{
     echo '<h2>Request</h2>' . "\n";
     echo '<pre>' . htmlspecialchars($client->__getLastRequest()). '</pre>';
     echo "\n";
@@ -35,7 +38,8 @@ function printRequestResponse($client){
 /**
  *  Print SOAP Fault
  */
-function printFault($exception, $client) {
+function printFault($exception, $client)
+{
    echo '<h2>Fault</h2>' . "<br>\n";
    echo "<b>Code:</b>{$exception->faultcode}<br>\n";
    echo "<b>String:</b>{$exception->faultstring}<br>\n";
@@ -49,7 +53,8 @@ function printFault($exception, $client) {
 /**
  * SOAP request/response logging to a file
  */
-function writeToLog($client){
+function writeToLog($client)
+{
 
   /**
      * __DIR__ refers to the directory path of the library file.
@@ -68,7 +73,8 @@ function writeToLog($client){
  * This section provides a convenient place to setup many commonly used variables
  * needed for the php sample code to function.
  */
-function getProperty($var){
+function getProperty($var)
+{
 
     if($var == 'parentkey') Return 'starinit';
     if($var == 'parentpassword') Return 'Smi4127IT';
@@ -147,12 +153,21 @@ function getProperty($var){
         ),
         'Address' => array(
             'StreetLines' => array('Address Line 1'),
-            'City' => 'Herndon',
-            'StateOrProvinceCode' => 'VA',
-            'PostalCode' => '20171',
-            'CountryCode' => 'US',
+            'City' => 'Richmond',
+            'StateOrProvinceCode' => 'BC',
+            'PostalCode' => 'V7C4V4',
+            'CountryCode' => 'CA',
             'Residential' => 1
         )
+        // 'Address' => array(
+        //     'StreetLines' => array('73 Canberra Ave'),
+        //     'City' => 'Kingston',
+        //     'StateOrProvinceCode' => 'AC',
+        //     'PostalCode' => '2603',
+        //     'CountryCode' => 'AU',
+        //     'Residential' => false
+        // )
+
     );
 
     if($var == 'address1') Return array(
@@ -208,36 +223,39 @@ function getProperty($var){
     );
 }
 
-function setEndpoint($var){
+function setEndpoint($var)
+{
     if($var == 'changeEndpoint') Return false;
     if($var == 'endpoint') Return 'XXX';
 }
 
-function printNotifications($notes){
-    foreach($notes as $noteKey => $note){
-        if(is_string($note)){
+function printNotifications($notes)
+{
+    foreach($notes as $noteKey => $note) {
+        if(is_string($note)) {
             echo $noteKey . ': ' . $note . Newline;
-        }
-        else{
+        } else {
             printNotifications($note);
         }
     }
     echo Newline;
 }
 
-function printError($client, $response){
+function printError($client, $response)
+{
     printReply($client, $response);
 }
 
-function trackDetails($details, $spacer){
-    foreach($details as $key => $value){
-        if(is_array($value) || is_object($value)){
+function trackDetails($details, $spacer)
+{
+    foreach($details as $key => $value) {
+        if(is_array($value) || is_object($value)) {
             $newSpacer = $spacer. '&nbsp;&nbsp;&nbsp;&nbsp;';
             echo '<tr><td>'. $spacer . $key.'</td><td>&nbsp;</td></tr>';
             trackDetails($value, $newSpacer);
-        }elseif(empty($value)){
+        } elseif(empty($value)) {
             echo '<tr><td>'.$spacer. $key .'</td><td>'.$value.'</td></tr>';
-        }else{
+        } else {
             echo '<tr><td>'.$spacer. $key .'</td><td>'.$value.'</td></tr>';
         }
     }

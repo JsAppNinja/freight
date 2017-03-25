@@ -93,7 +93,6 @@ class UpsService implements ShippingServiceInterface
             $shipFromAddress->setCity($request->item['origin']['majorMunicipality']);
             $shipFromAddress->setstateProvinceCode($request->item['origin']['stateProvince']);
             $shipFromAddress->setCountryCode($request->item['origin']['country']);
-            // $shipFromAddress->setStreetType($request->item['origin']['AddressType']);
 
             $shipFrom->setAddress($originaddress);
             $shipment->setShipFrom($shipFrom);
@@ -109,7 +108,6 @@ class UpsService implements ShippingServiceInterface
 
             $shipToAddress->setPostalCode($request->item['destination']['postalCode']);
             $shipToAddress->setCountryCode($request->item['destination']['country']);
-            // $shipToAddress->setStreetType($request->item['destination']['AddressType']);
 
 
             // $shipment->Service->Code = '03';

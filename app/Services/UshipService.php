@@ -169,7 +169,7 @@ class UshipService implements ShippingServiceInterface
             $items[$i]['packaging'] = $packaging[$i];
             $items[$i]['lbs'] = $lbs[$i];
             if($freightClass[$i] > 0) {
-                $items[$i]['freightClass'] = $freightClass[$i];                
+                $items[$i]['freightClass'] = $freightClass[$i];
             } else {
                 $items[$i]['lengthInMeters'] = $lengthInMeters[$i];
                 $items[$i]['heightInMeters'] = $heightInMeters[$i];
@@ -260,7 +260,7 @@ class UshipService implements ShippingServiceInterface
         } else {
             try {
                 $response = curl_exec( $ch );
-                $result = json_decode($response); 
+                $result = json_decode($response);
                 return $result->price->value;;
             } catch (Exception $e) {
                 return $e->getMessage();

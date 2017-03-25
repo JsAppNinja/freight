@@ -27,7 +27,6 @@ class FedexService implements ShippingServiceInterface
         $rules['item.origin.postalCode'] = 'required|string|max:255' ;
         $rules['item.origin.stateProvince'] = 'required|string|max:255' ;
         $rules['item.origin.country'] = 'required|string|max:255' ;
-        // $rules['item.origin.AddressType'] = 'required|string|max:255' ;
         $rules['item.origin.name'] = 'required|string|max:255' ;
         $rules['item.origin.companyName'] = 'required|string|max:255' ;
         $rules['item.origin.phoneNumber'] = 'required|string|max:255' ;
@@ -42,6 +41,11 @@ class FedexService implements ShippingServiceInterface
         $rules['item.destination.name'] = 'required|string|max:255' ;
         $rules['item.destination.companyName'] = 'required|string|max:255' ;
         $rules['item.destination.phoneNumber'] = 'required|string|max:255' ;
+
+        //Attributes
+        // $rules['item.destination.dropoffType'] = 'required|string|max:255' ;
+        // $rules['item.destination.serviceType'] = 'required|string|max:255' ;
+        // $rules['item.destination.packagingType'] = 'required|string|max:255' ;
 
         // items rules
 
@@ -60,10 +64,6 @@ class FedexService implements ShippingServiceInterface
     public function returnData($request)
     {
         $fedex['WebAuthenticationDetail'] = array(
-            // 'ParentCredential' => array(
-            //     'Key' => getProperty('parentkey'),
-            //     'Password' => getProperty('parentpassword')
-            // ),
             'UserCredential' => array(
                 'Key' => getProperty('key'),
                 'Password' => getProperty('password')
@@ -81,30 +81,29 @@ class FedexService implements ShippingServiceInterface
             'Minor' => '0'
         );
         $fedex['ReturnTransitAndCommit'] = true;
-        $fedex['RequestedShipment']['DropoffType'] = 'REGULAR_PICKUP'; // valid values REGULAR_PICKUP, REQUEST_COURIER, ...
+        $fedex['RequestedShipment']['DropoffType'] = $request->item['dropoffType']; //'REGULAR_PICKUP'; // valid values REGULAR_PICKUP, REQUEST_COURIER, ...
         $fedex['RequestedShipment']['ShipTimestamp'] = date('c');
-        $fedex['RequestedShipment']['ServiceType'] = 'INTERNATIONAL_PRIORITY'; // valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, ...
-        $fedex['RequestedShipment']['PackagingType'] = 'YOUR_PACKAGING'; // valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING, ...
-        $fedex['RequestedShipment']['TotalInsuredValue']=array(
-            'Ammount'=>100,
-            'Currency'=>'USD'
-        );
+        $fedex['RequestedShipment']['ServiceType'] = $request->item['serviceType']; //'INTERNATIONAL_PRIORITY'; // valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, ...
+        $fedex['RequestedShipment']['PackagingType'] = $request->item['packagingType']; //'YOUR_PACKAGING'; // valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING, ...
+        // $fedex['RequestedShipment']['TotalInsuredValue']=array(
+        //     'Ammount'=>100,
+        //     'Currency'=>'USD'
+        // );
         $fedex['RequestedShipment']['Shipper'] = $this->addShipper($request);
         $fedex['RequestedShipment']['Recipient'] = $this->addRecipient($request);
         $fedex['RequestedShipment']['ShippingChargesPayment'] = $this->addShippingChargesPayment($request);
-        $fedex['RequestedShipment']['PackageCount'] = '1';
-        // $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItems($request);
-        $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItem($request);
+        $fedex['RequestedShipment']['PackageCount'] = $request->get('count');
+        $fedex['RequestedShipment']['RequestedPackageLineItems'] = $this->addPackageLineItems($request);
 
         return $fedex;
     }
 
-    public function call($fedex){
+    public function call($fedex)
+    {
 
         $newline = "<br />";
         //The WSDL is not included with the sample code.
         //Please include and reference in $path_to_wsdl variable.
-        // $path_to_wsdl = "http://localhost:8080/wsdl/RateService_v20.wsdl";
         $path_to_wsdl = "../libs/fedex/wsdl/RateService_v20.wsdl";
 
         ini_set("soap.wsdl_cache_enabled", "0");
@@ -117,39 +116,37 @@ class FedexService implements ShippingServiceInterface
                 'verify_peer_name'=>false,
                 'allow_self_signed' => true //can fiddle with this one.
             )))
-        ));
-
-        // $client = new SoapClient($path_to_wsdl, array('trace' => 1)); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
+        )); // Refer to http://us3.php.net/manual/en/ref.soap.php for more information
 
         try {
-            if(setEndpoint('changeEndpoint')){
+            if(setEndpoint('changeEndpoint')) {
                 $newLocation = $client->__setLocation(setEndpoint('endpoint'));
             }
 
             $response = $client -> getRates($fedex);
-            // var_dump($response); exit;
 
             if ($response -> HighestSeverity != 'FAILURE' && $response -> HighestSeverity != 'ERROR'){
                 $rateReply = $response -> RateReplyDetails;
+
                 // echo '<table border="1">';
                 // echo '<tr><td>Service Type</td><td>Amount</td><td>Delivery Date</td></tr><tr>';
-                // $serviceType = '<td>'.$rateReply -> ServiceType . '</td>';
-                // if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)){
-                //     $amount = '<td>$' . number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",") . '</td>';
-                // }elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)){
-                //     $amount = '<td>$' . number_format($rateReply->RatedShipmentDetails->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",") . '</td>';
-                // }
+            	// $serviceType = '<td>'.$rateReply -> ServiceType . '</td>';
+            	// if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)){
+        		// 	$amount = '<td>$' . number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",") . '</td>';
+        		// }elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)){
+        		// 	$amount = '<td>$' . number_format($rateReply->RatedShipmentDetails->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",") . '</td>';
+        		// }
                 // if(array_key_exists('DeliveryTimestamp',$rateReply)){
-                //     $deliveryDate= '<td>' . $rateReply->DeliveryTimestamp . '</td>';
+                // 	$deliveryDate= '<td>' . $rateReply->DeliveryTimestamp . '</td>';
                 // }else if(array_key_exists('TransitTime',$rateReply)){
-                //     $deliveryDate= '<td>' . $rateReply->TransitTime . '</td>';
+                // 	$deliveryDate= '<td>' . $rateReply->TransitTime . '</td>';
                 // }else {
-                //     $deliveryDate='<td>&nbsp;</td>';
+                // 	$deliveryDate='<td>&nbsp;</td>';
                 // }
                 // echo $serviceType . $amount. $deliveryDate;
                 // echo '</tr>';
                 // echo '</table>';
-                // printSuccess($client, $response);
+
                 if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)){
                     $amount = number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",");
                 }elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)){
@@ -157,17 +154,22 @@ class FedexService implements ShippingServiceInterface
                 }
                 return $amount;
             }else{
-                printError($client, $response);
+                $notifications = $response -> Notifications;
+                if(is_array($notifications)) {
+                    return  $notifications[0] -> LocalizedMessage;
+                } else {
+                    return  $notifications -> LocalizedMessage;
+                }
+                // printError($client, $response);
             }
             // writeToLog($client);    // Write to log file
         } catch (SoapFault $exception) {
            printFault($exception, $client);
         }
-
-
     }
 
-    function addShipper($request){
+    function addShipper($request)
+    {
         $shipper = array(
             'Contact' => array(
                 'PersonName' => $request->item['origin']['name'],
@@ -184,7 +186,9 @@ class FedexService implements ShippingServiceInterface
         );
         return $shipper;
     }
-    function addRecipient($request){
+
+    function addRecipient($request)
+    {
         $recipient = array(
             'Contact' => array(
                 'PersonName' => $request->item['destination']['name'],
@@ -192,14 +196,6 @@ class FedexService implements ShippingServiceInterface
                 'PhoneNumber' => $request->item['destination']['phoneNumber']
             ),
 
-            // 'Address' => array(
-            //     'StreetLines' => array('73 Canberra Ave'),
-            //     'City' => 'Kingston',
-            //     'StateOrProvinceCode' => 'AC',
-            //     'PostalCode' => '2603',
-            //     'CountryCode' => 'AU',
-            //     'Residential' => false
-            // )
             'Address' => array(
                 'StreetLines' => array($request->item['destination']['streetAddress']),
                 'City' => $request->item['destination']['majorMunicipality'],
@@ -211,7 +207,9 @@ class FedexService implements ShippingServiceInterface
         );
         return $recipient;
     }
-    function addShippingChargesPayment(){
+
+    function addShippingChargesPayment()
+    {
         $shippingChargesPayment = array(
             'PaymentType' => 'SENDER', // valid values RECIPIENT, SENDER and THIRD_PARTY
             'Payor' => array(
@@ -223,7 +221,9 @@ class FedexService implements ShippingServiceInterface
         );
         return $shippingChargesPayment;
     }
-    function addLabelSpecification(){
+
+    function addLabelSpecification()
+    {
         $labelSpecification = array(
             'LabelFormatType' => 'COMMON2D', // valid values COMMON2D, LABEL_DATA_ONLY
             'ImageType' => 'PDF',  // valid values DPL, EPL2, PDF, ZPLII and PNG
@@ -231,7 +231,9 @@ class FedexService implements ShippingServiceInterface
         );
         return $labelSpecification;
     }
-    function addSpecialServices(){
+
+    function addSpecialServices()
+    {
         $specialServices = array(
             'SpecialServiceTypes' => array('COD'),
             'CodDetail' => array(
@@ -244,29 +246,14 @@ class FedexService implements ShippingServiceInterface
         );
         return $specialServices;
     }
-    function addPackageLineItem($request){
-        $packageLineItem = array(
-            'SequenceNumber'=>1,
-            'GroupPackageCount'=> $request->items[0]['unitCount'],
-            'Weight' => array(
-                'Value' => $request->items[0]['lbs'],
-                'Units' => 'LB'
-            ),
-            'Dimensions' => array(
-                'Length' => $request->items[0]['lengthInMeters'],
-                'Width' => $request->items[0]['widthInMeters'],
-                'Height' => $request->items[0]['heightInMeters'],
-                'Units' => 'IN'
-            )
-        );
-        return $packageLineItem;
-    }
-    function addPackageLineItems($request){
+
+    function addPackageLineItems($request)
+    {
         $packageLineItems = [];
         for($i = 0; $i < $request->get('count'); $i++) {
-            $packageLineItems[i] = array(
-                'SequenceNumber'=>$i,
-                'GroupPackageCount'=> $request->items[0]['unitCount'],
+            $packageLineItems[$i] = array(
+                'SequenceNumber'=>$i + 1,
+                'GroupPackageCount'=> $request->items[$i]['unitCount'],
                 'Weight' => array(
                     'Value' => $request->items[$i]['lbs'],
                     'Units' => 'LB'

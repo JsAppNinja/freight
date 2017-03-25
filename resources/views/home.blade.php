@@ -108,7 +108,7 @@
                                         <input type="radio" name="item[origin][timeFrameType]" value="daysdelay"> DaysDelay<br>
                                     </div>
                                 </div>
-                            </fieldset>                    
+                            </fieldset>
                             <fieldset>
                                 <legend>Contact:</legend>
                                 <div class="form-group row">
@@ -129,7 +129,7 @@
                                         <input name="item[origin][phoneNumber]" type="tel" class="input"></input>
                                     </div>
                                 </div>
-                            </fieldset>                            
+                            </fieldset>
                             <fieldset>
                                 <legend>Attribute:</legend>
                                 <div class="form-group row">
@@ -437,30 +437,105 @@
                     </div>
                     <button id="addItem"><i class="glyphicon glyphicon-plus"></i>add new Item</button>
                 </fieldset>
-                <fieldset class="route">
-                    <legend class="route-legend">Attribute</legend>
-                    <div class="form-group row">
-                        <label class="col-md-5">protectfromFreezing:</label>
-                        <div class="col-md-7">
-                            <input type="radio" name="protectfromFreezing" value="true" > Yes
-                            <input type="radio" name="protectfromFreezing" value="false"checked> No<br>
-                        </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <fieldset class="route">
+                            <legend class="route-legend">Attribute</legend>
+                            <div class="form-group row">
+                                <label class="col-md-5">protectfromFreezing:</label>
+                                <div class="col-md-7">
+                                    <input type="radio" name="protectfromFreezing" value="true" > Yes
+                                    <input type="radio" name="protectfromFreezing" value="false"checked> No<br>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5">sortandSegregate:</label>
+                                <div class="col-md-7">
+                                    <input type="radio" name="sortandSegregate" value="true" > Yes
+                                    <input type="radio" name="sortandSegregate" value="false" checked> No<br>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-5">blindShipmentCoordination:</label>
+                                <div class="col-md-7">
+                                    <input type="radio" name="blindShipmentCoordination" value="true" > Yes
+                                    <input type="radio" name="blindShipmentCoordination" value="false" checked> No<br>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-5">sortandSegregate:</label>
-                        <div class="col-md-7">
-                            <input type="radio" name="sortandSegregate" value="true" > Yes
-                            <input type="radio" name="sortandSegregate" value="false" checked> No<br>
-                        </div>
+                    <div class="col-sm-6">
+                        <fieldset class="route">
+                            <legend class="route-legend">FedEx Attribute</legend>
+                            <div class="form-group row">
+                                <label class="col-md-4">Dropoff Type:</label>
+                                <div class="col-md-8">
+                                    <select name="item[dropoffType]" style="width: 100%;">
+                                        <option value="BUSINESS_SERVICE_CENTER">BUSINESS_SERVICE_CENTER</option>
+                                        <option value="DROP_BOX">DROP_BOX</option>
+                                        <option value="REGULAR_PICKUP" selected>REGULAR_PICKUP</option>
+                                        <option value="REQUEST_COURIER">REQUEST_COURIER</option>
+                                        <option value="STATION">STATION</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Service Type:</label>
+                                <div class="col-md-8">
+                                    <select name="item[serviceType]" style="width: 100%;">
+                                        <option value="EUROPE_FIRST_INTERNATIONAL_PRIORITY">EUROPE_FIRST_INTERNATIONAL_PRIORITY</option>
+                                        <option value="FEDEX_1_DAY_FREIGHT">FEDEX_1_DAY_FREIGHT</option>
+                                        <option value="FEDEX_2_DAY">FEDEX_2_DAY</option>
+                                        <option value="FEDEX_2_DAY_AM">FEDEX_2_DAY_AM</option>
+                                        <option value="FEDEX_2_DAY_FREIGHT">FEDEX_2_DAY_FREIGHT</option>
+                                        <option value="FEDEX_3_DAY_FREIGHT">FEDEX_3_DAY_FREIGHT</option>
+                                        <option value="FEDEX_DISTANCE_DEFERRED">FEDEX_DISTANCE_DEFERRED</option>
+                                        <option value="FEDEX_EXPRESS_SAVER">FEDEX_EXPRESS_SAVER</option>
+                                        <option value="FEDEX_FIRST_FREIGHT">FEDEX_FIRST_FREIGHT</option>
+                                        <option value="FEDEX_FREIGHT_ECONOMY">FEDEX_FREIGHT_ECONOMY</option>
+                                        <option value="FEDEX_FREIGHT_PRIORITY">FEDEX_FREIGHT_PRIORITY</option>
+                                        <option value="FEDEX_GROUND">FEDEX_GROUND</option>
+                                        <option value="FEDEX_NEXT_DAY_AFTERNOON">FEDEX_NEXT_DAY_AFTERNOON</option>
+                                        <option value="FEDEX_NEXT_DAY_EARLY_MORNING">FEDEX_NEXT_DAY_EARLY_MORNING</option>
+                                        <option value="FEDEX_NEXT_DAY_END_OF_DAY">FEDEX_NEXT_DAY_END_OF_DAY</option>
+                                        <option value="FEDEX_NEXT_DAY_FREIGHT">FEDEX_NEXT_DAY_FREIGHT</option>
+                                        <option value="FEDEX_NEXT_DAY_MID_MORNING">FEDEX_NEXT_DAY_MID_MORNING</option>
+                                        <option value="FIRST_OVERNIGHT">FIRST_OVERNIGHT</option>
+                                        <option value="GROUND_HOME_DELIVERY">GROUND_HOME_DELIVERY</option>
+                                        <option value="INTERNATIONAL_ECONOMY">INTERNATIONAL_ECONOMY</option>
+                                        <option value="INTERNATIONAL_ECONOMY_FREIGHT">INTERNATIONAL_ECONOMY_FREIGHT</option>
+                                        <option value="INTERNATIONAL_FIRST">INTERNATIONAL_FIRST</option>
+                                        <option value="INTERNATIONAL_PRIORITY" selected>INTERNATIONAL_PRIORITY</option>
+                                        <option value="INTERNATIONAL_PRIORITY_FREIGHT">INTERNATIONAL_PRIORITY_FREIGHT</option>
+                                        <option value="PRIORITY_OVERNIGHT">PRIORITY_OVERNIGHT</option>
+                                        <option value="SAME_DAY">SAME_DAY</option>
+                                        <option value="SAME_DAY_CITY">SAME_DAY_CITY</option>
+                                        <option value="SMART_POST">SMART_POST</option>
+                                        <option value="STANDARD_OVERNIGHT">STANDARD_OVERNIGHT</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4">Packaging Type:</label>
+                                <div class="col-md-8">
+                                    <select name="item[packagingType]" style="width: 100%;">
+                                        <option value="FEDEX_10KG_BOX">FEDEX_10KG_BOX</option>
+                                        <option value="FEDEX_25KG_BOX">FEDEX_25KG_BOX</option>
+                                        <option value="FEDEX_BOX">FEDEX_BOX</option>
+                                        <option value="FEDEX_ENVELOPE">FEDEX_ENVELOPE</option>
+                                        <option value="FEDEX_EXTRA_LARGE_BOX">FEDEX_EXTRA_LARGE_BOX</option>
+                                        <option value="FEDEX_LARGE_BOX">FEDEX_LARGE_BOX</option>
+                                        <option value="FEDEX_MEDIUM_BOX">FEDEX_MEDIUM_BOX</option>
+                                        <option value="FEDEX_PAK">FEDEX_PAK</option>
+                                        <option value="FEDEX_SMALL_BOX">FEDEX_SMALL_BOX</option>
+                                        <option value="FEDEX_TUBE">FEDEX_TUBE</option>
+                                        <option value="YOUR_PACKAGING" selected>YOUR_PACKAGING</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-5">blindShipmentCoordination:</label>
-                        <div class="col-md-7">
-                            <input type="radio" name="blindShipmentCoordination" value="true" > Yes
-                            <input type="radio" name="blindShipmentCoordination" value="false" checked> No<br>
-                        </div>
-                    </div>
-                </fieldset>
+                </div>
                 <div class="row">
                     <div class="col-sm-12">
                     <input type="submit" value="Send" id="submit" class="col-sm-3 col-md-2 col-lg-2 col-xs-4 pull-right" style="margin-top: 10px;">
