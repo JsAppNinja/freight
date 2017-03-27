@@ -18,9 +18,10 @@
                 <fieldset>
                     <legend>ShippingType</legend>
                     <div class="text-center">
-                        <span class="col-sm-4"><input type="radio" name="thirdParty" value="uship" checked> UShip</span>
-                        <span class="col-sm-4"><input type="radio" name="thirdParty" value="UPS"> UPS</span>
-                        <span class="col-sm-4"><input type="radio" name="thirdParty" value="FedEx"> FedEx</span>
+                        <span class="col-sm-3"><input type="radio" name="thirdParty" value="UShip" checked> UShip</span>
+                        <span class="col-sm-3"><input type="radio" name="thirdParty" value="UPS"> UPS</span>
+                        <span class="col-sm-3"><input type="radio" name="thirdParty" value="FedEx"> FedEx</span>
+                        <span class="col-sm-3"><input type="radio" name="thirdParty" value="FREIGHTQUOTE"> FREIGHTQUOTE</span>
                     </div>
                 </fieldset>
                 <fieldset class="route">
@@ -281,156 +282,158 @@
                     <legend class="route-legend">Items:</legend>
                     <div class="firstItem" id="firstItem">
                         <div class="sendItem" id="sendItem">
-                            <div class="form-group row">
-                                <label class="col-md-4">Commodity:</label>
-                                <div class="col-md-8">
-                                    <select name="items[0][Commodity]" style="width: 100%;">
-                                        <option value="NewCommercialGoods">NewCommercialGoods</option>
-                                        <option value="CarsLightTrucks">CarsLightTrucks</option>
-                                        <option value="UsedCommercialGoods">UsedCommercialGoods</option>
-                                        <option value="WineLiquorBeerSpirits">WineLiquorBeerSpirits</option>
-                                        <option value="NonPerishableFoodsBeverages">NonPerishableFoodsBeverages</option>
-                                        <option value="OtherLessthanTruckloadGoods">OtherLessthanTruckloadGoods</option>
-                                        <option value="WoodPaperProducts">WoodPaperProducts</option>
-                                        <option value="LiquidsGasesChemicals">LiquidsGasesChemicals</option>
-                                        <option value="StoneMetalsMinerals">StoneMetalsMinerals</option>
-                                        <option value="CommoditiesDryBulk">CommoditiesDryBulk</option>
-                                        <option value="GeneralFreight">GeneralFreight</option>
-                                        <option value="MixedFreight">MixedFreight</option>
-                                        <option value="Utilities">Utilities</option>
-                                        <option value="PharmaceuticalProducts">PharmaceuticalProducts</option>
-                                        <option value="Fertilizers">Fertilizers</option>
-                                        <option value="PlasticsRubber">PlasticsRubber</option>
-                                        <option value="TextilesLeather">TextilesLeather</option>
-                                        <option value="MiscellaneousManufacturedProducts">MiscellaneousManufacturedProducts</option>
-                                        <option value="OtherBusinessIndustrialGoods">OtherBusinessIndustrialGoods</option>
-                                        <option value="PaperProducts">PaperProducts</option>
-                                        <option value="LogsandOtherWoodintheRough">LogsandOtherWoodintheRough</option>
-                                        <option value="WoodProducts">WoodProducts</option>
-                                        <option value="PaperorPaperboardArticles">PaperorPaperboardArticles</option>
-                                        <option value="PrintedProducts">PrintedProducts</option>
-                                        <option value="LiquidsGases">LiquidsGases</option>
-                                        <option value="Chemicals">Chemicals</option>
-                                        <option value="CrudePetroleumOil">CrudePetroleumOil</option>
-                                        <option value="WaterWell">WaterWell</option>
-                                        <option value="GasolineandAviationTurbineFuel">GasolineandAviationTurbineFuel</option>
-                                        <option value="FuelOils">FuelOils</option>
-                                        <option value="ChemicalProductsandPreparationsnec">ChemicalProductsandPreparationsnec</option>
-                                        <option value="BuildingMaterials">BuildingMaterials</option>
-                                        <option value="MachineryLargeObjects">MachineryLargeObjects</option>
-                                        <option value="ElectronicandOtherElectricalEquipmentandComponentsandOfficeEquipment">ElectronicandOtherElectricalEquipmentandComponentsandOfficeEquipment</option>
-                                        <option value="PrecisionInstrumentsandApparatus">PrecisionInstrumentsandApparatus</option>
-                                        <option value="CoalorCoke">CoalorCoke</option>
-                                        <option value="MonumentalorBuildingStone">MonumentalorBuildingStone</option>
-                                        <option value="NaturalSands">NaturalSands</option>
-                                        <option value="GravelandCrushedStone">GravelandCrushedStone</option>
-                                        <option value="NonMetallicMineralsnec">NonMetallicMineralsnec</option>
-                                        <option value="MetallicOresandConcentrates">MetallicOresandConcentrates</option>
-                                        <option value="CoalandPetroleumProductsnec">CoalandPetroleumProductsnec</option>
-                                        <option value="NonMetallicMineralProducts">NonMetallicMineralProducts</option>
-                                        <option value="Metalsheetscoilsrolls">Metalsheetscoilsrolls</option>
-                                        <option value="BaseMetalinPrimaryorSemiFinishedFormsandinFinishedBasic">BaseMetalinPrimaryorSemiFinishedFormsandinFinishedBasic</option>
-                                        <option value="ArticlesofBaseMetal">ArticlesofBaseMetal</option>
-                                        <option value="VehicleParts">VehicleParts</option>
-                                        <option value="BoatParts">BoatParts</option>
-                                        <option value="RefrigeratedFood">RefrigeratedFood</option>
-                                        <option value="MeatFishSeafood">MeatFishSeafood</option>
-                                        <option value="CerealGrainsincludingseed">CerealGrainsincludingseed</option>
-                                        <option value="AnimalFeedProductsofAnimalOrigin">AnimalFeedProductsofAnimalOrigin</option>
-                                        <option value="MilledGrainProductsPreparationsandBakeryProducts">MilledGrainProductsPreparationsandBakeryProducts</option>
-                                        <option value="Beverages">Beverages</option>
-                                        <option value="AlcoholicBeverages">AlcoholicBeverages</option>
-                                        <option value="OtherPreparedFoodstuffsandFatsandOils">OtherPreparedFoodstuffsandFatsandOils</option>
-                                        <option value="TobaccoProducts">TobaccoProducts</option>
-                                        <option value="OtherFoodAgriculture">OtherFoodAgriculture</option>
-                                    </select>
+                            <div class="row">
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">Commodity:</label>
+                                    <div class="col-md-8">
+                                        <select name="items[0][Commodity]" style="width: 100%;">
+                                            <option value="NewCommercialGoods">NewCommercialGoods</option>
+                                            <option value="CarsLightTrucks">CarsLightTrucks</option>
+                                            <option value="UsedCommercialGoods">UsedCommercialGoods</option>
+                                            <option value="WineLiquorBeerSpirits">WineLiquorBeerSpirits</option>
+                                            <option value="NonPerishableFoodsBeverages">NonPerishableFoodsBeverages</option>
+                                            <option value="OtherLessthanTruckloadGoods">OtherLessthanTruckloadGoods</option>
+                                            <option value="WoodPaperProducts">WoodPaperProducts</option>
+                                            <option value="LiquidsGasesChemicals">LiquidsGasesChemicals</option>
+                                            <option value="StoneMetalsMinerals">StoneMetalsMinerals</option>
+                                            <option value="CommoditiesDryBulk">CommoditiesDryBulk</option>
+                                            <option value="GeneralFreight">GeneralFreight</option>
+                                            <option value="MixedFreight">MixedFreight</option>
+                                            <option value="Utilities">Utilities</option>
+                                            <option value="PharmaceuticalProducts">PharmaceuticalProducts</option>
+                                            <option value="Fertilizers">Fertilizers</option>
+                                            <option value="PlasticsRubber">PlasticsRubber</option>
+                                            <option value="TextilesLeather">TextilesLeather</option>
+                                            <option value="MiscellaneousManufacturedProducts">MiscellaneousManufacturedProducts</option>
+                                            <option value="OtherBusinessIndustrialGoods">OtherBusinessIndustrialGoods</option>
+                                            <option value="PaperProducts">PaperProducts</option>
+                                            <option value="LogsandOtherWoodintheRough">LogsandOtherWoodintheRough</option>
+                                            <option value="WoodProducts">WoodProducts</option>
+                                            <option value="PaperorPaperboardArticles">PaperorPaperboardArticles</option>
+                                            <option value="PrintedProducts">PrintedProducts</option>
+                                            <option value="LiquidsGases">LiquidsGases</option>
+                                            <option value="Chemicals">Chemicals</option>
+                                            <option value="CrudePetroleumOil">CrudePetroleumOil</option>
+                                            <option value="WaterWell">WaterWell</option>
+                                            <option value="GasolineandAviationTurbineFuel">GasolineandAviationTurbineFuel</option>
+                                            <option value="FuelOils">FuelOils</option>
+                                            <option value="ChemicalProductsandPreparationsnec">ChemicalProductsandPreparationsnec</option>
+                                            <option value="BuildingMaterials">BuildingMaterials</option>
+                                            <option value="MachineryLargeObjects">MachineryLargeObjects</option>
+                                            <option value="ElectronicandOtherElectricalEquipmentandComponentsandOfficeEquipment">ElectronicandOtherElectricalEquipmentandComponentsandOfficeEquipment</option>
+                                            <option value="PrecisionInstrumentsandApparatus">PrecisionInstrumentsandApparatus</option>
+                                            <option value="CoalorCoke">CoalorCoke</option>
+                                            <option value="MonumentalorBuildingStone">MonumentalorBuildingStone</option>
+                                            <option value="NaturalSands">NaturalSands</option>
+                                            <option value="GravelandCrushedStone">GravelandCrushedStone</option>
+                                            <option value="NonMetallicMineralsnec">NonMetallicMineralsnec</option>
+                                            <option value="MetallicOresandConcentrates">MetallicOresandConcentrates</option>
+                                            <option value="CoalandPetroleumProductsnec">CoalandPetroleumProductsnec</option>
+                                            <option value="NonMetallicMineralProducts">NonMetallicMineralProducts</option>
+                                            <option value="Metalsheetscoilsrolls">Metalsheetscoilsrolls</option>
+                                            <option value="BaseMetalinPrimaryorSemiFinishedFormsandinFinishedBasic">BaseMetalinPrimaryorSemiFinishedFormsandinFinishedBasic</option>
+                                            <option value="ArticlesofBaseMetal">ArticlesofBaseMetal</option>
+                                            <option value="VehicleParts">VehicleParts</option>
+                                            <option value="BoatParts">BoatParts</option>
+                                            <option value="RefrigeratedFood">RefrigeratedFood</option>
+                                            <option value="MeatFishSeafood">MeatFishSeafood</option>
+                                            <option value="CerealGrainsincludingseed">CerealGrainsincludingseed</option>
+                                            <option value="AnimalFeedProductsofAnimalOrigin">AnimalFeedProductsofAnimalOrigin</option>
+                                            <option value="MilledGrainProductsPreparationsandBakeryProducts">MilledGrainProductsPreparationsandBakeryProducts</option>
+                                            <option value="Beverages">Beverages</option>
+                                            <option value="AlcoholicBeverages">AlcoholicBeverages</option>
+                                            <option value="OtherPreparedFoodstuffsandFatsandOils">OtherPreparedFoodstuffsandFatsandOils</option>
+                                            <option value="TobaccoProducts">TobaccoProducts</option>
+                                            <option value="OtherFoodAgriculture">OtherFoodAgriculture</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">handlingUnit:</label>
+                                    <div class="col-md-8">
+                                        <select name="items[0][handlingUnit]" style="width:100%;">
+                                            <option value="Boxes">Boxes</option>
+                                            <option value="Cartons">Cartons</option>
+                                            <option value="Crates">Crates</option>
+                                            <option value="Drums">Drums</option>
+                                            <option value="Bags">Bags</option>
+                                            <option value="Bales">Bales</option>
+                                            <option value="Bundles">Bundles</option>
+                                            <option value="Cans">Cans</option>
+                                            <option value="Carboys">Carboys</option>
+                                            <option value="Carpets">Carpets</option>
+                                            <option value="Cases">Cases</option>
+                                            <option value="Coils">Coils</option>
+                                            <option value="Cylinders">Cylinders</option>
+                                            <option value="Loose">Loose</option>
+                                            <option value="NoPackagingRequired">NoPackagingRequired</option>
+                                            <option value="PackagingHelpRequired">PackagingHelpRequired</option>
+                                            <option value="Pallets48X40Inches">Pallets48X40Inches</option>
+                                            <option value="Pails">Pails</option>
+                                            <option value="Reels">Reels</option>
+                                            <option value="Rolls">Rolls</option>
+                                            <option value="TubesPipes">TubesPipes</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">unitCount:</label>
-                                <div class="col-md-8">
-                                    <input name="items[0][unitCount]" type="text" class="input" value=1></input>
+                            <div class="row">
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">unitCount:</label>
+                                    <div class="col-md-8">
+                                        <input name="items[0][unitCount]" type="text" class="input" value=1></input>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">Length:</label>
+                                    <div class="col-md-8">
+                                        <input name="items[0][lengthInMeters]" type="text" class="input"></input>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">packaging:</label>
-                                <div class="col-md-8">
-                                    <select name="items[0][packaging]">
-                                        <option value="Pallets">Pallets</option>
-                                    </select>
+                            <div class="row">
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">Width:</label>
+                                    <div class="col-md-8">
+                                        <input name="items[0][widthInMeters]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">Height:</label>
+                                    <div class="col-md-8">
+                                        <input name="items[0][heightInMeters]" type="text" class="input"></input>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">Length:</label>
-                                <div class="col-md-8">
-                                    <input name="items[0][lengthInMeters]" type="text" class="input"></input>
+                            <div class="row">
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">LBS:</label>
+                                    <div class="col-md-8">
+                                        <input name="items[0][lbs]" type="text" class="input"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">freightClass:</label>
+                                    <div class="col-md-8">
+                                        <input name="items[0][freightClass]" type="text" class="input"></input>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">Width:</label>
-                                <div class="col-md-8">
-                                    <input name="items[0][widthInMeters]" type="text" class="input"></input>
+                            <div class="row">
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">stackable:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="items[0][stackable]" value="true"> Yes
+                                        <input type="radio" name="items[0][stackable]" value="false" checked> No<br>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">Height:</label>
-                                <div class="col-md-8">
-                                    <input name="items[0][heightInMeters]" type="text" class="input"></input>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">LBS:</label>
-                                <div class="col-md-8">
-                                    <input name="items[0][lbs]" type="text" class="input"></input>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">freightClass:</label>
-                                <div class="col-md-8">
-                                    <input name="items[0][freightClass]" type="text" class="input"></input>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">stackable:</label>
-                                <div class="col-md-8">
-                                    <input type="radio" name="items[0][stackable]" value="true"> Yes
-                                    <input type="radio" name="items[0][stackable]" value="false" checked> No<br>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">hazardous:</label>
-                                <div class="col-md-8">
-                                    <input type="radio" name="items[0][hazardous]" value="true"> Yes
-                                    <input type="radio" name="items[0][hazardous]" value="false" checked> No<br>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-4">handlingUnit:</label>
-                                <div class="col-md-8">
-                                    <select name="items[0][handlingUnit]">
-                                        <option value="Boxes">Boxes</option>
-                                        <option value="Cartons">Cartons</option>
-                                        <option value="Crates">Crates</option>
-                                        <option value="Drums">Drums</option>
-                                        <option value="Bags">Bags</option>
-                                        <option value="Bales">Bales</option>
-                                        <option value="Bundles">Bundles</option>
-                                        <option value="Cans">Cans</option>
-                                        <option value="Carboys">Carboys</option>
-                                        <option value="Carpets">Carpets</option>
-                                        <option value="Cases">Cases</option>
-                                        <option value="Coils">Coils</option>
-                                        <option value="Cylinders">Cylinders</option>
-                                        <option value="Loose">Loose</option>
-                                        <option value="NoPackagingRequired">NoPackagingRequired</option>
-                                        <option value="PackagingHelpRequired">PackagingHelpRequired</option>
-                                        <option value="Pallets48X40Inches">Pallets48X40Inches</option>
-                                        <option value="Pails">Pails</option>
-                                        <option value="Reels">Reels</option>
-                                        <option value="Rolls">Rolls</option>
-                                        <option value="TubesPipes">TubesPipes</option>
-                                        <option value="Other">Other</option>
-                                    </select>
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">hazardous:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="items[0][hazardous]" value="true"> Yes
+                                        <input type="radio" name="items[0][hazardous]" value="false" checked> No<br>
+                                    </div>
                                 </div>
                             </div>
                         </div>

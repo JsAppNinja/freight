@@ -7,6 +7,7 @@ use App\Contracts\ShippingServiceInterface;
 use App\Services\UshipService;
 use App\Services\UpsService;
 use App\Services\FedexService;
+use App\Services\FrightquoteService;
 
 class ShippingTypeServiceProvider extends ServiceProvider
 {
@@ -29,12 +30,14 @@ class ShippingTypeServiceProvider extends ServiceProvider
     {
         $this->app->bind("App\Contracts\ShippingServiceInterface", function($app){
             $shipping_Type = $this->app->request->thirdParty;
-            if ( $shipping_Type == "uship" ) {
+            if ( $shipping_Type == "UShip" ) {
                 return new UshipService();
-            } else if ($shipping_Type == "UPS" ){
+            } else if ($shipping_Type == "UPS" ) {
                 return new UpsService();
-            } else {
+            } else if ($shipping_Type == "FedEx" ) {
                 return new FedexService();
+            } else {
+                return new FrightquoteService();
             }
         });
     }

@@ -55,7 +55,7 @@ class UshipService implements ShippingServiceInterface
         for ($i = 0; $i < $count; $i++) {
             $rules['items.'.$i.'.Commodity'] = 'required|string|max:255';
             $rules['items.'.$i.'.unitCount'] = 'required|integer|max:50';
-            $rules['items.'.$i.'.packaging'] = 'required|string|max:255';
+            // $rules['items.'.$i.'.packaging'] = 'required|string|max:255';
             $rules['items.'.$i.'.lengthInMeters'] = 'required_without:'.'items.'.$i.'.freightClass';
             $rules['items.'.$i.'.heightInMeters'] = 'required_with:'.'items.'.$i.'.lengthInMeters';
             $rules['items.'.$i.'.lbs'] = 'required|numeric';
@@ -131,7 +131,7 @@ class UshipService implements ShippingServiceInterface
         for ( $i = 0; $i < $count; $i++) {
             $commodity[$i] = $request->items[$i]['Commodity'];
             $unitCount[$i] = $request->items[$i]['unitCount'];
-            $packaging[$i] = $request->items[$i]['packaging'];
+            $packaging[$i] = "Pallets"; //$request->items[$i]['packaging'];
             $lengthInMeters[$i] = $request->items[$i]['lengthInMeters'];
             $heightInMeters[$i] = $request->items[$i]['heightInMeters'];
             $lbs[$i] = $request->items[$i]['lbs'];
