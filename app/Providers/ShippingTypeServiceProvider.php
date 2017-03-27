@@ -7,7 +7,7 @@ use App\Contracts\ShippingServiceInterface;
 use App\Services\UshipService;
 use App\Services\UpsService;
 use App\Services\FedexService;
-use App\Services\FrightquoteService;
+use App\Services\FreightquoteService;
 
 class ShippingTypeServiceProvider extends ServiceProvider
 {
@@ -37,7 +37,7 @@ class ShippingTypeServiceProvider extends ServiceProvider
             } else if ($shipping_Type == "FedEx" ) {
                 return new FedexService();
             } else {
-                return new FrightquoteService();
+                return new FreightquoteService();
             }
         });
     }

@@ -150,15 +150,15 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">callBeforeArrival:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[origin][callBeforeArrival]" value="true"> Yes
-                                        <input type="radio" name="item[origin][callBeforeArrival]" value="false" checked> No<br>
+                                        <input type="radio" name="item[origin][callBeforeArrival]" value="true" checked> Yes
+                                        <input type="radio" name="item[origin][callBeforeArrival]" value="false"> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">appointmentRequired:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[origin][appointmentRequired]" value="true"> Yes
-                                        <input type="radio" name="item[origin][appointmentRequired]" value="false" checked> No<br>
+                                        <input type="radio" name="item[origin][appointmentRequired]" value="true" checked> Yes
+                                        <input type="radio" name="item[origin][appointmentRequired]" value="false"> No<br>
                                     </div>
                                 </div>
                             </fieldset>
@@ -322,15 +322,15 @@
                                 <div class="form-group row">
                                     <label class="col-md-4">callBeforeArrival:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[destination][callBeforeArrival]" value="true"> Yes
-                                        <input type="radio" name="item[destination][callBeforeArrival]" value="false" checked> No<br>
+                                        <input type="radio" name="item[destination][callBeforeArrival]" value="true" checked> Yes
+                                        <input type="radio" name="item[destination][callBeforeArrival]" value="false"> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">appointmentRequired:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="item[destination][appointmentRequired]" value="true"> Yes
-                                        <input type="radio" name="item[destination][appointmentRequired]" value="false" checked> No<br>
+                                        <input type="radio" name="item[destination][appointmentRequired]" value="true" checked> Yes
+                                        <input type="radio" name="item[destination][appointmentRequired]" value="false"> No<br>
                                     </div>
                                 </div>
                             </fieldset>
@@ -542,8 +542,8 @@
                                 <div class="form-group col-sm-6 no-side-margin">
                                     <label class="col-md-4">stackable:</label>
                                     <div class="col-md-8">
-                                        <input type="radio" name="items[0][stackable]" value="true"> Yes
-                                        <input type="radio" name="items[0][stackable]" value="false" checked> No<br>
+                                        <input type="radio" name="items[0][stackable]" value="true" checked> Yes
+                                        <input type="radio" name="items[0][stackable]" value="false"> No<br>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6 no-side-margin">

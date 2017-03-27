@@ -43,9 +43,9 @@ class FedexService implements ShippingServiceInterface
         $rules['item.destination.phoneNumber'] = 'required|string|max:255' ;
 
         //Attributes
-        // $rules['item.destination.dropoffType'] = 'required|string|max:255' ;
-        // $rules['item.destination.serviceType'] = 'required|string|max:255' ;
-        // $rules['item.destination.packagingType'] = 'required|string|max:255' ;
+        $rules['item.destination.dropoffType'] = 'required|string|max:255' ;
+        $rules['item.destination.serviceType'] = 'required|string|max:255' ;
+        $rules['item.destination.packagingType'] = 'required|string|max:255' ;
 
         // items rules
 
