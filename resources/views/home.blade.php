@@ -131,7 +131,7 @@
                                 </div>
                             </fieldset>
                             <fieldset>
-                                <legend>Attribute:</legend>
+                                <legend>UShip Attribute:</legend>
                                 <div class="form-group row">
                                     <label class="col-md-4">Inside:</label>
                                     <div class="col-md-8">
@@ -244,7 +244,7 @@
                                 </div>
                             </fieldset>
                             <fieldset>
-                                <legend>Attribute:</legend>
+                                <legend>UShip Attribute:</legend>
                                 <div class="form-group row">
                                     <label class="col-md-4">Inside:</label>
                                     <div class="col-md-8">
@@ -440,7 +440,7 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <fieldset class="route">
-                            <legend class="route-legend">Attribute</legend>
+                            <legend class="route-legend">UShip Attribute:</legend>
                             <div class="form-group row">
                                 <label class="col-md-5">protectfromFreezing:</label>
                                 <div class="col-md-7">
@@ -466,7 +466,7 @@
                     </div>
                     <div class="col-sm-6">
                         <fieldset class="route">
-                            <legend class="route-legend">FedEx Attribute</legend>
+                            <legend class="route-legend">FedEx Attribute:</legend>
                             <div class="form-group row">
                                 <label class="col-md-4">Dropoff Type:</label>
                                 <div class="col-md-8">
