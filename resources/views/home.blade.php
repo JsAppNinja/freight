@@ -162,6 +162,65 @@
                                     </div>
                                 </div>
                             </fieldset>
+                            <fieldset>
+                                <legend>Freightquote Attribute:</legend>
+                                <div class="form-group row">
+                                    <label class="col-md-4">HasLoadingDock:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[origin][hasLoadingDock]" value="true"> Yes
+                                        <input type="radio" name="item[origin][hasLoadingDock]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">IsConstructionSite:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[origin][isConstructionSite]" value="true"> Yes
+                                        <input type="radio" name="item[origin][isConstructionSite]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">RequiresInsideDelivery:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[origin][requiresInsideDelivery]" value="true"> Yes
+                                        <input type="radio" name="item[origin][requiresInsideDelivery]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">IsTradeShow:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[origin][isTradeShow]" value="true"> Yes
+                                        <input type="radio" name="item[origin][isTradeShow]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">IsResidential:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[origin][isResidential]" value="true"> Yes
+                                        <input type="radio" name="item[origin][isResidential]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">RequiresLiftgate:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[origin][requiresLiftgate]" value="true"> Yes
+                                        <input type="radio" name="item[origin][requiresLiftgate]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">HasAppointment:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[origin][hasAppointment]" value="true"> Yes
+                                        <input type="radio" name="item[origin][hasAppointment]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">IsLimitedAccess:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[origin][isLimitedAccess]" value="true"> Yes
+                                        <input type="radio" name="item[origin][isLimitedAccess]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
                         <div class="destination col-sm-6" id="destination">
                             <fieldset>
@@ -272,6 +331,65 @@
                                     <div class="col-md-8">
                                         <input type="radio" name="item[destination][appointmentRequired]" value="true"> Yes
                                         <input type="radio" name="item[destination][appointmentRequired]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Freightquote Attribute:</legend>
+                                <div class="form-group row">
+                                    <label class="col-md-4">HasLoadingDock:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[destination][hasLoadingDock]" value="true"> Yes
+                                        <input type="radio" name="item[destination][hasLoadingDock]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">IsConstructionSite:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[destination][isConstructionSite]" value="true"> Yes
+                                        <input type="radio" name="item[destination][isConstructionSite]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">RequiresInsideDelivery:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[destination][requiresInsideDelivery]" value="true"> Yes
+                                        <input type="radio" name="item[destination][requiresInsideDelivery]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">IsTradeShow:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[destination][isTradeShow]" value="true"> Yes
+                                        <input type="radio" name="item[destination][isTradeShow]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">IsResidential:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[destination][isResidential]" value="true"> Yes
+                                        <input type="radio" name="item[destination][isResidential]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">RequiresLiftgate:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[destination][requiresLiftgate]" value="true"> Yes
+                                        <input type="radio" name="item[destination][requiresLiftgate]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">HasAppointment:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[destination][hasAppointment]" value="true"> Yes
+                                        <input type="radio" name="item[destination][hasAppointment]" value="false" checked> No<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4">IsLimitedAccess:</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="item[destination][isLimitedAccess]" value="true"> Yes
+                                        <input type="radio" name="item[destination][isLimitedAccess]" value="false" checked> No<br>
                                     </div>
                                 </div>
                             </fieldset>

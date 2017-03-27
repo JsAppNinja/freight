@@ -34,11 +34,20 @@ class UshipService implements ShippingServiceInterface
         $rules['item.origin.stateProvince'] = 'required|string|max:255' ;
         $rules['item.origin.country'] = 'required|string|max:255' ;
         $rules['item.origin.AddressType'] = 'required|string|max:255' ;
+
         $rules['item.origin.earliestArrival'] = 'required|date' ;
         $rules['item.origin.latestArrival'] = 'required|date' ;
+        $rules['item.origin.timeFrameType'] = 'required|string|max:255' ;
+
         $rules['item.origin.name'] = 'required|string|max:255' ;
         $rules['item.origin.companyName'] = 'required|string|max:255' ;
         $rules['item.origin.phoneNumber'] = 'required|string|max:255' ;
+
+        //Attributes
+        $rules['item.origin.inside'] = 'required|boolean|max:255' ;
+        $rules['item.origin.liftgateRequired'] = 'required|boolean|max:255' ;
+        $rules['item.origin.callBeforeArrival'] = 'required|boolean|max:255' ;
+        $rules['item.origin.appointmentRequired'] = 'required|boolean|max:255' ;
 
         // destination Address rules
 
@@ -49,6 +58,12 @@ class UshipService implements ShippingServiceInterface
         $rules['item.destination.name'] = 'required|string|max:255' ;
         $rules['item.destination.companyName'] = 'required|string|max:255' ;
         $rules['item.destination.phoneNumber'] = 'required|string|max:255' ;
+
+        //Attributes
+        $rules['item.destination.inside'] = 'required|boolean|max:255' ;
+        $rules['item.destination.liftgateRequired'] = 'required|boolean|max:255' ;
+        $rules['item.destination.callBeforeArrival'] = 'required|boolean|max:255' ;
+        $rules['item.destination.appointmentRequired'] = 'required|boolean|max:255' ;
 
         // items rules
 
@@ -62,6 +77,8 @@ class UshipService implements ShippingServiceInterface
             // $rules['items.'.$i.'.freightClass'] = 'required|numeric';
             $rules['items.'.$i.'.freightClass'] = 'required_without:'.'items.'.$i.'.lengthInMeters';
             $rules['items.'.$i.'.handlingUnit'] = 'required|string|max:255';
+            $rules['items.'.$i.'.stackable'] = 'required|boolean|max:255';
+            $rules['items.'.$i.'.hazardous'] = 'required|boolean|max:255';
         }
 
         return $rules;
