@@ -35,6 +35,8 @@ class HomeController extends Controller
     public function sendjson(Request $request)
     {
         $count = $request->get('count');
+        // var_dump($request->get('count')); exit;
+
         $rules = $this->shippingService->getRule($count);
         $this->validate($request,$rules);
         $shippingData = $this->shippingService->returnData($request);

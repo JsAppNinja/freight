@@ -33,7 +33,7 @@ class UshipService implements ShippingServiceInterface
         $rules['item.origin.postalCode'] = 'required|string|max:255' ;
         $rules['item.origin.stateProvince'] = 'required|string|max:255' ;
         $rules['item.origin.country'] = 'required|string|max:255' ;
-        $rules['item.origin.AddressType'] = 'required|string|max:255' ;
+        $rules['item.origin.addressType'] = 'required|string|max:255' ;
 
         $rules['item.origin.earliestArrival'] = 'required|date' ;
         $rules['item.origin.latestArrival'] = 'required|date' ;
@@ -44,26 +44,26 @@ class UshipService implements ShippingServiceInterface
         $rules['item.origin.phoneNumber'] = 'required|string|max:255' ;
 
         //Attributes
-        $rules['item.origin.inside'] = 'required|boolean|max:255' ;
-        $rules['item.origin.liftgateRequired'] = 'required|boolean|max:255' ;
-        $rules['item.origin.callBeforeArrival'] = 'required|boolean|max:255' ;
-        $rules['item.origin.appointmentRequired'] = 'required|boolean|max:255' ;
+        $rules['item.origin.inside'] = 'required|string|max:255' ;
+        $rules['item.origin.liftgateRequired'] = 'required|string|max:255' ;
+        $rules['item.origin.callBeforeArrival'] = 'required|string|max:255' ;
+        $rules['item.origin.appointmentRequired'] = 'required|string|max:255' ;
 
         // destination Address rules
 
         $rules['item.destination.postalCode'] = 'required|string|max:255' ;
         $rules['item.destination.country'] = 'required|string|max:255' ;
-        $rules['item.destination.AddressType'] = 'required|string|max:255' ;
+        $rules['item.destination.addressType'] = 'required|string|max:255' ;
 
         $rules['item.destination.name'] = 'required|string|max:255' ;
         $rules['item.destination.companyName'] = 'required|string|max:255' ;
         $rules['item.destination.phoneNumber'] = 'required|string|max:255' ;
 
         //Attributes
-        $rules['item.destination.inside'] = 'required|boolean|max:255' ;
-        $rules['item.destination.liftgateRequired'] = 'required|boolean|max:255' ;
-        $rules['item.destination.callBeforeArrival'] = 'required|boolean|max:255' ;
-        $rules['item.destination.appointmentRequired'] = 'required|boolean|max:255' ;
+        $rules['item.destination.inside'] = 'required|string|max:255' ;
+        $rules['item.destination.liftgateRequired'] = 'required|string|max:255' ;
+        $rules['item.destination.callBeforeArrival'] = 'required|string|max:255' ;
+        $rules['item.destination.appointmentRequired'] = 'required|string|max:255' ;
 
         // items rules
 
@@ -77,8 +77,8 @@ class UshipService implements ShippingServiceInterface
             // $rules['items.'.$i.'.freightClass'] = 'required|numeric';
             $rules['items.'.$i.'.freightClass'] = 'required_without:'.'items.'.$i.'.lengthInMeters';
             $rules['items.'.$i.'.handlingUnit'] = 'required|string|max:255';
-            $rules['items.'.$i.'.stackable'] = 'required|boolean|max:255';
-            $rules['items.'.$i.'.hazardous'] = 'required|boolean|max:255';
+            $rules['items.'.$i.'.stackable'] = 'required|string|max:255';
+            $rules['items.'.$i.'.hazardous'] = 'required|string|max:255';
         }
 
         return $rules;
@@ -105,7 +105,7 @@ class UshipService implements ShippingServiceInterface
         $originAddress['postalCode'] = $request->item['origin']['postalCode'];
         $originAddress['stateProvince'] = $request->item['origin']['stateProvince'];
         $originAddress['country'] = $request->item['origin']['country'];
-        $originAddress['AddressType'] = $request->item['origin']['AddressType'];
+        $originAddress['addressType'] = $request->item['origin']['addressType'];
 
         // Origin TimeFrame
 
@@ -130,7 +130,7 @@ class UshipService implements ShippingServiceInterface
 
         $destinationAddress['postalCode'] = $request->item['destination']['postalCode'];
         $destinationAddress['country'] = $request->item['destination']['country'];
-        $destinationAddress['AddressType'] = $request->item['destination']['AddressType'];
+        $destinationAddress['addressType'] = $request->item['destination']['addressType'];
 
         // Desitination attributes
 

@@ -8467,3 +8467,7 @@ input:checked + .slider:before {
     margin-left: 0px !important;
     margin-right: 0px !important;
 }
+
+.full-width {
+    width:100%;
+}

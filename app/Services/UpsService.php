@@ -49,7 +49,6 @@ class UpsService implements ShippingServiceInterface
         // items rules
 
         for ($i = 0; $i < $count; $i++) {
-            $rules['items.'.$i.'.Commodity'] = 'required|string|max:255';
             $rules['items.'.$i.'.unitCount'] = 'required|integer|max:50';
             $rules['items.'.$i.'.lengthInMeters'] = 'required|numeric';
             $rules['items.'.$i.'.widthInMeters'] = 'required|numeric';
@@ -79,7 +78,6 @@ class UpsService implements ShippingServiceInterface
             $originaddress->setCity($request->item['origin']['majorMunicipality']);
             $originaddress->setstateProvinceCode($request->item['origin']['stateProvince']);
             $originaddress->setCountryCode($request->item['origin']['country']);
-            $originaddress->setStreetType($request->item['origin']['AddressType']);
 
 
             //shipFrom
