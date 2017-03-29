@@ -18,7 +18,7 @@
                 <fieldset>
                     <legend>ShippingType</legend>
                     <div class="text-center">
-                        <span class="col-sm-3"><input type="radio" name="thirdParty" value="UShip"> UShip</span>
+                        <span class="col-sm-3"><input type="radio" name="thirdParty" value="UShip" checked> UShip</span>
                         <span class="col-sm-3"><input type="radio" name="thirdParty" value="UPS"> UPS</span>
                         <span class="col-sm-3"><input type="radio" name="thirdParty" value="FedEx"> FedEx</span>
                         <span class="col-sm-3"><input type="radio" name="thirdParty" value="Freightquote"> Freightquote</span>
@@ -153,7 +153,7 @@
                                         <input type="radio" name="item[origin][isConstructionSite]" value="false" checked> No<br>
                                     </div>
                                 </div>
-                                <!-- <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-md-4">RequiresInsideDelivery:</label>
                                     <div class="col-md-8">
                                         <input type="radio" name="item[origin][requiresInsideDelivery]" value="true"> Yes
@@ -166,7 +166,7 @@
                                         <input type="radio" name="item[origin][isTradeShow]" value="true"> Yes
                                         <input type="radio" name="item[origin][isTradeShow]" value="false" checked> No<br>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">IsResidential:</label>
                                     <div class="col-md-8">
@@ -181,7 +181,7 @@
                                         <input type="radio" name="item[origin][requiresLiftgate]" value="false" checked> No<br>
                                     </div>
                                 </div>
-                                <!-- <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-md-4">HasAppointment:</label>
                                     <div class="col-md-8">
                                         <input type="radio" name="item[origin][hasAppointment]" value="true"> Yes
@@ -194,7 +194,7 @@
                                         <input type="radio" name="item[origin][isLimitedAccess]" value="true"> Yes
                                         <input type="radio" name="item[origin][isLimitedAccess]" value="false" checked> No<br>
                                     </div>
-                                </div> -->
+                                </div>
                             </fieldset>
                         </div>
                         <div class="destination col-sm-6" id="destination">
@@ -325,7 +325,7 @@
                                         <input type="radio" name="item[destination][isConstructionSite]" value="false" checked> No<br>
                                     </div>
                                 </div>
-                                <!-- <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-md-4">RequiresInsideDelivery:</label>
                                     <div class="col-md-8">
                                         <input type="radio" name="item[destination][requiresInsideDelivery]" value="true"> Yes
@@ -338,7 +338,7 @@
                                         <input type="radio" name="item[destination][isTradeShow]" value="true"> Yes
                                         <input type="radio" name="item[destination][isTradeShow]" value="false" checked> No<br>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-md-4">IsResidential:</label>
                                     <div class="col-md-8">
@@ -353,7 +353,7 @@
                                         <input type="radio" name="item[destination][requiresLiftgate]" value="false" checked> No<br>
                                     </div>
                                 </div>
-                                <!-- <div class="form-group row">
+                                <div class="form-group row">
                                     <label class="col-md-4">HasAppointment:</label>
                                     <div class="col-md-8">
                                         <input type="radio" name="item[destination][hasAppointment]" value="true"> Yes
@@ -366,7 +366,7 @@
                                         <input type="radio" name="item[destination][isLimitedAccess]" value="true"> Yes
                                         <input type="radio" name="item[destination][isLimitedAccess]" value="false" checked> No<br>
                                     </div>
-                                </div> -->
+                                </div>
                             </fieldset>
                         </div>
                     </div>
@@ -400,20 +400,56 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-6 no-side-margin">
-                            <label class="col-md-4">ShipmentLabel:</label>
-                            <div class="col-md-8">
-                                <input name="item[shipmentLabel]" type="text" class="input full-width"></input>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 no-side-margin">
-                            <label class="col-md-4">IsBlind:</label>
-                            <div class="col-md-8">
+                        <div class="form-group col-sm-4 no-side-margin">
+                            <label class="col-md-6">IsBlind:</label>
+                            <div class="col-md-6">
                                 <input type="radio" name="item[isBlind]" value="true"> Yes
                                 <input type="radio" name="item[isBlind]" value="false" checked> No<br>
                             </div>
                         </div>
+                        <div class="form-group col-sm-4 no-side-margin">
+                            <label class="col-md-6">SortAndSegregate:</label>
+                            <div class="col-md-6">
+                                <input type="radio" name="item[sortAndSegregate]" value="true"> Yes
+                                <input type="radio" name="item[sortAndSegregate]" value="false" checked> No<br>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 no-side-margin">
+                            <label class="col-md-6">UseStackableFlag:</label>
+                            <div class="col-md-6">
+                                <input type="radio" name="item[useStackableFlag]" value="true"> Yes
+                                <input type="radio" name="item[useStackableFlag]" value="false" checked> No<br>
+                            </div>
+                        </div>
                     </div>
+                    <!-- <div class="row">
+                        <div class="form-group row">
+                            <label class="col-md-4">TLEquipment Type:</label>
+                            <div class="col-md-8">
+                                <select name="item[tlEquipmentType]" class="full-width">
+                                    <option value="Any">Any</option>
+                                    <option value="DryVan">DryVan</option>
+                                    <option value="Rail" selected>Rail</option>
+                                    <option value="Reefer">Reefer</option>
+                                    <option value="Flatbed">Flatbed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4">TLEquipment Size:</label>
+                            <div class="col-md-8">
+                                <select name="item[tlEquipmentSize]" class="full-width">
+                                    <option value="Any">Any</option>
+                                    <option value="FiftyThreeFootDryVan">FiftyThreeFootDryVan</option>
+                                    <option value="FortyEightFootDryVan" selected>FortyEightFootDryVan</option>
+                                    <option value="FortyEightFootFlatbedNoTarps">FortyEightFootFlatbedNoTarps</option>
+                                    <option value="FortyEightFootFlatbedTarps">FortyEightFootFlatbedTarps</option>
+                                    <option value="FortyEightOrFiftyThreeDryVan">FortyEightOrFiftyThreeDryVan</option>
+                                    <option value="FiftyThreeFlatbed">FiftyThreeFlatbed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> -->
                 </fieldset>
                 <div class="row">
                     <div class="col-sm-6">
@@ -541,10 +577,18 @@
                     <legend class="route-legend">Items:</legend>
                     <div class="firstItem" id="firstItem">
                         <div class="sendItem" id="sendItem">
-                            <div class="row form-group no-side-margin" name="Freightquote">
-                                <div class="col-md-12">
-                                    <label>Product Description:</label>
-                                    <input name="items[0][productDescription]" type="text" class="input full-width"></input>
+                            <div class="row" name="Freightquote">
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">Class:</label>
+                                    <div class="col-md-8">
+                                        <input name="items[0][class]" type="text" class="input full-width"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-6 no-side-margin">
+                                    <label class="col-md-4">Product Description:</label>
+                                    <div class="col-md-8">
+                                        <input name="items[0][productDescription]" type="text" class="input full-width"></input>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row" name="UShip">
@@ -644,9 +688,9 @@
                                 </div>
                             </div>
                             <div class="row" name="Freightquote">
-                                <div class="form-group col-sm-6 no-side-margin">
-                                    <label class="col-md-4">Commodity Type:</label>
-                                    <div class="col-md-8">
+                                <div class="form-group col-sm-4 no-side-margin">
+                                    <div class="col-md-12">
+                                        <label>Commodity Type:</label>
                                         <select name="items[0][commodityType]" class="full-width">
                                             <option value="GeneralMerchandise">GeneralMerchandise</option>
                                             <option value="Machinery">Machinery</option>
@@ -681,9 +725,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-6 no-side-margin">
-                                    <label class="col-md-4">Package Type:</label>
-                                    <div class="col-md-8">
+                                <div class="form-group col-sm-4 no-side-margin">
+                                    <div class="col-md-12">
+                                        <label>Package Type:</label>
                                         <select name="items[0][packageType]" class="full-width">
                                             <option value="Unknown">Unknown</option>
                                             <option value="Pallets_48x40">Pallets_48x40</option>
@@ -714,11 +758,9 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" name="Freightquote">
-                                <div class="form-group col-sm-6 no-side-margin">
-                                    <label class="col-md-4">Content Type:</label>
-                                    <div class="col-md-8">
+                                <div class="form-group col-sm-4 no-side-margin">
+                                    <div class="col-md-12">
+                                        <label>Content Type:</label>
                                         <select name="items[0][contentType]" class="full-width">
                                             <option value="NewCommercialGoods">NewCommercialGoods</option>
                                             <option value="UsedCommercialGoods">UsedCommercialGoods</option>
@@ -728,12 +770,6 @@
                                             <option value="Motorcycle">Motorcycle</option>
                                             <option value="AutoOrMotorcycle">AutoOrMotorcycle</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-6 no-side-margin">
-                                    <label class="col-md-4">Declared Value:</label>
-                                    <div class="col-md-8">
-                                        <input name="items[0][declaredValue]" type="text" class="input full-width"></input>
                                     </div>
                                 </div>
                             </div>
@@ -772,14 +808,14 @@
                                         <input name="items[0][lbs]" type="text" class="input full-width"></input>
                                     </div>
                                 </div>
-                                <div class="form-group col-sm-6 no-side-margin">
+                                <div class="form-group col-sm-6 no-side-margin" name="UShip">
                                     <label class="col-md-4">freightClass:</label>
                                     <div class="col-md-8">
                                         <input name="items[0][freightClass]" type="text" class="input full-width"></input>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" name="UShip">
+                            <div class="row" name="StackAndHazardous">
                                 <div class="form-group col-sm-6 no-side-margin">
                                     <label class="col-md-4">stackable:</label>
                                     <div class="col-md-8">
@@ -795,16 +831,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" name="Freightquote">
-                                <div class="form-group col-sm-6 no-side-margin">
-                                    <label class="col-md-4">Hazardous:</label>
-                                    <div class="col-md-8">
-                                        <input type="radio" name="items[0][isHazardousMaterial]" value="true"> Yes
-                                        <input type="radio" name="items[0][isHazardousMaterial]" value="false" checked> No<br>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" name="Freightquote">
+                            <!-- <div class="row" name="Freightquote">
                                 <div class="form-group col-sm-6 no-side-margin">
                                     <div class="col-md-12">
                                         <label>HazardousMaterialPackingGroup:</label>
@@ -871,7 +898,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <button id="addItem"><i class="glyphicon glyphicon-plus"></i>add new Item</button>
@@ -900,9 +927,7 @@
         var i=0;
         $('#addItem').click(function(e) {
             i++;
-            e.preventDefault();
             var newdiv = $("#firstItem div.sendItem").eq(0).clone();
-            console.log(newdiv);
             newdiv.find('input').each(function(){
                 this.name = this.name.replace('[0]', '['+i+']');
             });
@@ -913,20 +938,22 @@
         });
 
         $('input[type=radio][name=thirdParty]').change(function() {
-            console.log(this.value);
             $('fieldset[name=UShip]').hide();
             $('div[name=UShip]').hide();
             $('fieldset[name=FedEx]').hide();
             $('fieldset[name=Freightquote]').hide();
             $('div[name=Freightquote]').hide();
+            $('div[name=StackAndHazardous]').hide();
             if (this.value == 'UShip') {
                 $('fieldset[name=UShip]').show();
                 $('div[name=UShip]').show();
+                $('div[name=StackAndHazardous]').show();
             } else if (this.value == 'FedEx') {
                 $('fieldset[name=FedEx]').show();
             } else if (this.value == 'Freightquote') {
                 $('fieldset[name=Freightquote]').show();
                 $('div[name=Freightquote]').show();
+                $('div[name=StackAndHazardous]').show();
             } else {
             }
         });

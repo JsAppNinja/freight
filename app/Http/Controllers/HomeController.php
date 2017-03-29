@@ -41,11 +41,6 @@ class HomeController extends Controller
         $this->validate($request,$rules);
         $shippingData = $this->shippingService->returnData($request);
         $price = $this->shippingService->call($shippingData);
-        if(floatval($price) > 0) {
-            return response()->json(['price' => $price], 200);
-        }
-        else {
-            return response()->json(['error' => $price], 401);
-        }
+        return response()->json(['price' => $price], 200);
     }
 }

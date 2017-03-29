@@ -33,19 +33,19 @@ class FedexService implements ShippingServiceInterface
 
         // destination Addres rules
 
-        $rules['item.origin.streetAddress'] = 'required|string|max:255' ;
-        $rules['item.origin.majorMunicipality'] = 'required|string|max:255' ;
+        $rules['item.destination.streetAddress'] = 'required|string|max:255' ;
+        $rules['item.destination.majorMunicipality'] = 'required|string|max:255' ;
         $rules['item.destination.postalCode'] = 'required|string|max:255' ;
-        $rules['item.origin.stateProvince'] = 'required|string|max:255' ;
+        $rules['item.destination.stateProvince'] = 'required|string|max:255' ;
         $rules['item.destination.country'] = 'required|string|max:255' ;
         $rules['item.destination.name'] = 'required|string|max:255' ;
         $rules['item.destination.companyName'] = 'required|string|max:255' ;
         $rules['item.destination.phoneNumber'] = 'required|string|max:255' ;
 
         //Attributes
-        $rules['item.destination.dropoffType'] = 'required|string|max:255' ;
-        $rules['item.destination.serviceType'] = 'required|string|max:255' ;
-        $rules['item.destination.packagingType'] = 'required|string|max:255' ;
+        // $rules['item.dropoffType'] = 'required|string|max:255' ;
+        // $rules['item.serviceType'] = 'required|string|max:255' ;
+        // $rules['item.packagingType'] = 'required|string|max:255' ;
 
         // items rules
 
