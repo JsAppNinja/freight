@@ -76,10 +76,8 @@ function writeToLog($client)
 function getProperty($var)
 {
 
-    if($var == 'parentkey') Return 'starinit';
-    if($var == 'parentpassword') Return 'Smi4127IT';
-    if($var == 'key') Return '1HV9OgrPBoxJC51Y';
-    if($var == 'password') Return 'Jas1ChHUN9ZTBMH3akbIJQgKQ';
+    if($var == 'key') Return env('FEDEX_USER_KEY');
+    if($var == 'password') Return env('FEDEX_USER_PWD');
     if($var == 'shipaccount') Return '510087500';
     if($var == 'billaccount') Return '510087500';
     if($var == 'dutyaccount') Return '510087500';

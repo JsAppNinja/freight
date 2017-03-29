@@ -147,13 +147,13 @@ class FedexService implements ShippingServiceInterface
                 // echo '</tr>';
                 // echo '</table>';
 
-                if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)){
+                if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)) {
                     $amount = number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",");
-                }elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)){
+                } elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)) {
                     $amount = number_format($rateReply->RatedShipmentDetails->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",");
                 }
                 return $amount;
-            }else{
+            } else {
                 $notifications = $response -> Notifications;
                 if(is_array($notifications)) {
                     return  $notifications[0] -> LocalizedMessage;

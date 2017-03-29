@@ -31,9 +31,7 @@
                             <fieldset>
                                 <legend>Shipper / ShipFrom:</legend>
                                 <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <label>streetAddress:</label>
-                                    </div>
+                                    <label class="col-md-4">streetAddress:</label>
                                     <div class="col-md-8">
                                         <input name="item[origin][streetAddress]" type="text" class="input"></input>
                                     </div>
@@ -178,7 +176,7 @@
                                         <input type="radio" name="item[origin][isConstructionSite]" value="false" checked> No<br>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label class="col-md-4">RequiresInsideDelivery:</label>
                                     <div class="col-md-8">
                                         <input type="radio" name="item[origin][requiresInsideDelivery]" value="true"> Yes
@@ -191,7 +189,7 @@
                                         <input type="radio" name="item[origin][isTradeShow]" value="true"> Yes
                                         <input type="radio" name="item[origin][isTradeShow]" value="false" checked> No<br>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group row">
                                     <label class="col-md-4">IsResidential:</label>
                                     <div class="col-md-8">
@@ -206,7 +204,7 @@
                                         <input type="radio" name="item[origin][requiresLiftgate]" value="false" checked> No<br>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label class="col-md-4">HasAppointment:</label>
                                     <div class="col-md-8">
                                         <input type="radio" name="item[origin][hasAppointment]" value="true"> Yes
@@ -219,7 +217,7 @@
                                         <input type="radio" name="item[origin][isLimitedAccess]" value="true"> Yes
                                         <input type="radio" name="item[origin][isLimitedAccess]" value="false" checked> No<br>
                                     </div>
-                                </div>
+                                </div> -->
                             </fieldset>
                         </div>
                         <div class="destination col-sm-6" id="destination">
@@ -350,7 +348,7 @@
                                         <input type="radio" name="item[destination][isConstructionSite]" value="false" checked> No<br>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label class="col-md-4">RequiresInsideDelivery:</label>
                                     <div class="col-md-8">
                                         <input type="radio" name="item[destination][requiresInsideDelivery]" value="true"> Yes
@@ -363,7 +361,7 @@
                                         <input type="radio" name="item[destination][isTradeShow]" value="true"> Yes
                                         <input type="radio" name="item[destination][isTradeShow]" value="false" checked> No<br>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group row">
                                     <label class="col-md-4">IsResidential:</label>
                                     <div class="col-md-8">
@@ -378,7 +376,7 @@
                                         <input type="radio" name="item[destination][requiresLiftgate]" value="false" checked> No<br>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label class="col-md-4">HasAppointment:</label>
                                     <div class="col-md-8">
                                         <input type="radio" name="item[destination][hasAppointment]" value="true"> Yes
@@ -391,7 +389,7 @@
                                         <input type="radio" name="item[destination][isLimitedAccess]" value="true"> Yes
                                         <input type="radio" name="item[destination][isLimitedAccess]" value="false" checked> No<br>
                                     </div>
-                                </div>
+                                </div> -->
                             </fieldset>
                         </div>
                     </div>
@@ -557,6 +555,50 @@
                         </div>
                     </div>
                     <button id="addItem"><i class="glyphicon glyphicon-plus"></i>add new Item</button>
+                </fieldset>
+                <fieldset class="route">
+                    <legend class="route-legend">Freightquote Attribute:</legend>
+                    <div class="row">
+                        <div class="form-group col-sm-6 no-side-margin">
+                            <label class="col-md-4">Quote Type:</label>
+                            <div class="col-md-8">
+                                <select name="item[quoteType]" style="width: 100%;">
+                                    <option value="B2B" selected>B2B</option>
+                                    <option value="eBay">eBay</option>
+                                    <option value="EnterpriseTMS">EnterpriseTMS</option>
+                                    <option value="Freightview">Freightview</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 no-side-margin">
+                            <label class="col-md-4">Service Type:</label>
+                            <div class="col-md-8">
+                                <select name="item[serviceType]" style="width: 100%;">
+                                    <option value="LTL" selected>LTL</option>
+                                    <option value="Truckload">Truckload</option>
+                                    <option value="Europe">Europe</option>
+                                    <option value="Groupage">Groupage</option>
+                                    <option value="Haulage">Haulage</option>
+                                    <option value="All">All</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6 no-side-margin">
+                            <label class="col-md-4">ShipmentLabel:</label>
+                            <div class="col-md-8">
+                                <input name="item[shipmentLabel]" type="text" class="input" style="width:100%;"></input>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 no-side-margin">
+                            <label class="col-md-4">IsBlind:</label>
+                            <div class="col-md-8">
+                                <input type="radio" name="item[isBlind]" value="true"> Yes
+                                <input type="radio" name="items[isBlind]" value="false" checked> No<br>
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
                 <div class="form-group row">
                     <div class="col-sm-6">
