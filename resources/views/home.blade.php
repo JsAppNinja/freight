@@ -388,13 +388,47 @@
                         <div class="form-group col-sm-6 no-side-margin">
                             <label class="col-md-4">Service Type:</label>
                             <div class="col-md-8">
-                                <select name="item[freightquoteServiceType]" class="full-width">
+                                <select name="item[freightquoteServiceType]" class="full-width" id="serviceType">
                                     <option value="LTL" selected>LTL</option>
                                     <option value="Truckload">Truckload</option>
                                     <option value="Europe">Europe</option>
                                     <option value="Groupage">Groupage</option>
                                     <option value="Haulage">Haulage</option>
                                     <option value="All">All</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="tl">
+                        <div class="form-group col-sm-4 no-side-margin">
+                            <div class="col-md-12">
+                            <label>TLDelivery Date:</label>
+                                <input name="item[origin][tlDeliveryDate]" type="date" class="input full-width"></input>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 no-side-margin">
+                            <div class="col-md-12">
+                                <label>TLEquipment Type:</label>
+                                <select name="item[tlEquipmentType]" class="full-width">
+                                    <option value="Any">Any</option>
+                                    <option value="DryVan">DryVan</option>
+                                    <option value="Rail">Rail</option>
+                                    <option value="Reefer">Reefer</option>
+                                    <option value="Flatbed">Flatbed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4 no-side-margin">
+                            <div class="col-md-12">
+                                <label>TLEquipment Size:</label>
+                                <select name="item[tlEquipmentSize]" class="full-width">
+                                    <option value="Any">Any</option>
+                                    <option value="FiftyThreeFootDryVan">FiftyThreeFootDryVan</option>
+                                    <option value="FortyEightFootDryVan">FortyEightFootDryVan</option>
+                                    <option value="FortyEightFootFlatbedNoTarps">FortyEightFootFlatbedNoTarps</option>
+                                    <option value="FortyEightFootFlatbedTarps">FortyEightFootFlatbedTarps</option>
+                                    <option value="FortyEightOrFiftyThreeDryVan">FortyEightOrFiftyThreeDryVan</option>
+                                    <option value="FiftyThreeFlatbed">FiftyThreeFlatbed</option>
                                 </select>
                             </div>
                         </div>
@@ -422,34 +456,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="form-group row">
-                            <label class="col-md-4">TLEquipment Type:</label>
-                            <div class="col-md-8">
-                                <select name="item[tlEquipmentType]" class="full-width">
-                                    <option value="Any">Any</option>
-                                    <option value="DryVan">DryVan</option>
-                                    <option value="Rail" selected>Rail</option>
-                                    <option value="Reefer">Reefer</option>
-                                    <option value="Flatbed">Flatbed</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-4">TLEquipment Size:</label>
-                            <div class="col-md-8">
-                                <select name="item[tlEquipmentSize]" class="full-width">
-                                    <option value="Any">Any</option>
-                                    <option value="FiftyThreeFootDryVan">FiftyThreeFootDryVan</option>
-                                    <option value="FortyEightFootDryVan" selected>FortyEightFootDryVan</option>
-                                    <option value="FortyEightFootFlatbedNoTarps">FortyEightFootFlatbedNoTarps</option>
-                                    <option value="FortyEightFootFlatbedTarps">FortyEightFootFlatbedTarps</option>
-                                    <option value="FortyEightOrFiftyThreeDryVan">FortyEightOrFiftyThreeDryVan</option>
-                                    <option value="FiftyThreeFlatbed">FiftyThreeFlatbed</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div> -->
                 </fieldset>
                 <div class="row">
                     <div class="col-sm-6">
@@ -597,7 +603,7 @@
                                     <div class="col-md-8">
                                         <select name="items[0][Commodity]" class="full-width">
                                             <option value="NewCommercialGoods">NewCommercialGoods</option>
-                                            <option value="CarsLightTrucks">CarsLightTrucks</option>
+                                            <option value="CarsLightTrucks" selected>CarsLightTrucks</option>
                                             <option value="UsedCommercialGoods">UsedCommercialGoods</option>
                                             <option value="WineLiquorBeerSpirits">WineLiquorBeerSpirits</option>
                                             <option value="NonPerishableFoodsBeverages">NonPerishableFoodsBeverages</option>
@@ -901,7 +907,7 @@
                             </div> -->
                         </div>
                     </div>
-                    <button id="addItem"><i class="glyphicon glyphicon-plus"></i>add new Item</button>
+                    <button type="button" id="addItem"><i class="glyphicon glyphicon-plus"></i>add new Item</button>
                 </fieldset>
                 <div class="row">
                     <div class="col-sm-12">
@@ -922,6 +928,7 @@
             $('fieldset[name=FedEx]').hide();
             $('fieldset[name=Freightquote]').hide();
             $('div[name=Freightquote]').hide();
+            $('#tl').hide();
         }
 
         var i=0;
@@ -955,6 +962,13 @@
                 $('div[name=Freightquote]').show();
                 $('div[name=StackAndHazardous]').show();
             } else {
+            }
+        });
+        $('#serviceType').on('change', function() {
+            if(this.value == 'Truckload') {
+                $('#tl').show();
+            } else {
+                $('#tl').hide();
             }
         });
     });
