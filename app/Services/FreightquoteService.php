@@ -122,6 +122,59 @@ class FreightquoteService implements ShippingServiceInterface
     public function call($freightquote)
     {
 
+        $xml = $this->_arrayToXml($freightquote);
+
+        $endpoint_url = "https://b2b.Freightquote.com/WebService/QuoteService.asmx";
+
+        $headers = array(
+            'Content-Type: text/xml; charset=utf-8',
+            'Content-Length: ' . strlen($xml),
+            'SOAPAction: "http://tempuri.org/GetRatingEngineQuote"'
+        );
+
+        $ch = curl_init( $endpoint_url );
+        curl_setopt( $ch, CURLOPT_POST, 1);
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $xml);
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt( $ch, CURLOPT_HEADER, 0);
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch) == 0) {
+
+            curl_close($ch);
+
+            //Simple check to make sure that this is a valid XML response
+            if (strpos(strtolower($response), 'soap:envelope') === false) {
+                return response()->json(['error' => 'Freightquote.com: Invalid response from server.'], 402);
+                // return 'Freightquote.com: Invalid response from server.';
+            }
+            if ($response) {
+                //Convert the XML into an easy-to-use associative array
+                $response = $this->_parseXml($response);
+                $response = $response['GetRatingEngineQuoteResponse'][0]['GetRatingEngineQuoteResult'][0];
+                if($response['QuoteId'] > 0) {
+                    $price = $response['QuoteCarrierOptions'][0]['CarrierOption'][0]['QuoteAmount'];
+                    return response()->json(['price' => $price], 200);
+                } else {
+                    $errorMessage = $response['ValidationErrors'][0]['B2BError'][0]['ErrorMessage'];
+                    return response()->json(['error' => $errorMessage], 402);
+                }
+            } else {
+                return response()->json(['error' => 'Freightquote.com: No Response'], 402);
+            }
+        } else {
+            //Collect the error returned
+            $curlErrors = curl_error($ch) . ' (Error No. ' . curl_errno($ch) . ')';
+
+            curl_close($ch);
+
+            return response()->json(['error' => 'Freightquote.com: ' . $curlErrors], 402);
+        }
+
     }
 
     function addShipper($request)
@@ -222,6 +275,82 @@ class FreightquoteService implements ShippingServiceInterface
         return $products;
     }
 
+    protected function _arrayToXml($array, $wrapper = true)
+    {
+        $xml = '';
+
+        if ($wrapper) {
+            $xml = '<?xml version="1.0" encoding="utf-8"?>' . "\n" .
+            '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' . "\n" .
+            'xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">' . "\n" .
+            '<soap:Body>' . "\n";
+        }
+
+        $first_key = true;
+
+        foreach ($array as $key => $value) {
+            $position = 0;
+
+            if (is_array($value)) {
+                $is_value_assoc = $this->_isAssoc($value);
+                $xml .= "<$key" . ($first_key && $wrapper ? ' xmlns="http://tempuri.org/"' : '') . ">\n";
+                $first_key = false;
+
+                foreach ($value as $key2 => $value2) {
+                    if (is_array($value2)) {
+                        if ($is_value_assoc) {
+                            $xml .= "<$key2>\n" . $this->_arrayToXml($value2, false) . "</$key2>\n";
+                        } elseif (is_array($value2)) {
+                            $xml .= $this->_arrayToXml($value2, false);
+                            $position++;
+                            if ($position < count($value) && count($value) > 1) $xml .= "</$key>\n<$key>\n";
+                        }
+                    } else {
+                        $xml .= "<$key2>" . $this->_xmlSafe($value2) . "</$key2>\n";
+                    }
+                }
+                $xml .= "</$key>\n";
+            } else {
+                $xml .= "<$key>" . $this->_xmlSafe($value) . "</$key>\n";
+            }
+        }
+
+        if ($wrapper) {
+            $xml .= '</soap:Body>' . "\n" .
+            '</soap:Envelope>';
+        }
+        return $xml;
+    }
+
+    protected function _isAssoc($array)
+    {
+        return (is_array($array) && 0 !== count(array_diff_key($array, array_keys(array_keys($array)))));
+    }
+
+    protected function _xmlSafe($str) {
+        //The 5 evil characters in XML
+        $str = str_replace('<', '&lt;', $str);
+        $str = str_replace('>', '&gt;', $str);
+        $str = str_replace('&', '&amp;', $str);
+        $str = str_replace("'", '&apos;', $str);
+        $str = str_replace('"', '&quot;', $str);
+
+        return $str;
+    }
+
+    protected function _parseXml($text)
+    {
+        $reg_exp = '/<(\w+)[^>]*>(.*?)<\/\\1>/s';
+        preg_match_all($reg_exp, $text, $match);
+        foreach ($match[1] as $key=>$val) {
+            if ( preg_match($reg_exp, $match[2][$key]) ) {
+                $array[$val][] = $this->_parseXml($match[2][$key]);
+            } else {
+                $array[$val] = $match[2][$key];
+            }
+        }
+        return $array;
+    }
 
 }
 
