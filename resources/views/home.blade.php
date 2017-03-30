@@ -400,15 +400,15 @@
                         </div>
                     </div>
                     <div class="row" id="tl">
-                        <div class="form-group col-sm-4 no-side-margin">
-                            <div class="col-md-12">
-                            <label>TLDelivery Date:</label>
-                                <input name="item[origin][tlDeliveryDate]" type="date" class="input full-width"></input>
+                        <div class="form-group col-sm-6 no-side-margin">
+                            <label class="col-md-4">TLDelivery Date:</label>
+                            <div class="col-md-8">
+                                <input name="item[tlDeliveryDate]" type="date" class="input full-width"></input>
                             </div>
                         </div>
-                        <div class="form-group col-sm-4 no-side-margin">
-                            <div class="col-md-12">
-                                <label>TLEquipment Type:</label>
+                        <div class="form-group col-sm-6 no-side-margin">
+                            <label class="col-md-4">TLEquipment Type:</label>
+                            <div class="col-md-8">
                                 <select name="item[tlEquipmentType]" class="full-width">
                                     <option value="Any">Any</option>
                                     <option value="DryVan">DryVan</option>
@@ -418,9 +418,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group col-sm-4 no-side-margin">
-                            <div class="col-md-12">
-                                <label>TLEquipment Size:</label>
+                        <div class="form-group col-sm-6 no-side-margin">
+                            <label class="col-md-4">TLEquipment Size:</label>
+                            <div class="col-md-8">
                                 <select name="item[tlEquipmentSize]" class="full-width">
                                     <option value="Any">Any</option>
                                     <option value="FiftyThreeFootDryVan">FiftyThreeFootDryVan</option>
@@ -429,6 +429,19 @@
                                     <option value="FortyEightFootFlatbedTarps">FortyEightFootFlatbedTarps</option>
                                     <option value="FortyEightOrFiftyThreeDryVan">FortyEightOrFiftyThreeDryVan</option>
                                     <option value="FiftyThreeFlatbed">FiftyThreeFlatbed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 no-side-margin">
+                            <label class="col-md-4">TLTarpSizeType:</label>
+                            <div class="col-md-8">
+                                <select name="item[tlTarpSizeType]" class="full-width">
+                                    <option value="NoTarpRequired">NoTarpRequired</option>
+                                    <option value="FourFeet">FourFeet</option>
+                                    <option value="SixFeet">SixFeet</option>
+                                    <option value="EightFeet">EightFeet</option>
+                                    <option value="Oversized">Oversized</option>
+                                    <option value="SmokeTarps">SmokeTarps</option>
                                 </select>
                             </div>
                         </div>

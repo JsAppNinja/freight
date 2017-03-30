@@ -152,19 +152,20 @@ class FedexService implements ShippingServiceInterface
                 } elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)) {
                     $amount = number_format($rateReply->RatedShipmentDetails->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",");
                 }
-                return $amount;
+                return response()->json(['price' => $amount], 200);
             } else {
                 $notifications = $response -> Notifications;
                 if(is_array($notifications)) {
-                    return  $notifications[0] -> LocalizedMessage;
+                    return response()->json(['error' => $notifications[0] -> LocalizedMessage], 402);
                 } else {
-                    return  $notifications -> LocalizedMessage;
+                    return response()->json(['error' => $notifications -> LocalizedMessage], 402);
                 }
                 // printError($client, $response);
             }
             // writeToLog($client);    // Write to log file
         } catch (SoapFault $exception) {
-           printFault($exception, $client);
+        //    printFault($exception, $client);
+           return response()->json(['error' => $exception -> faultstring], 402);
         }
     }
 

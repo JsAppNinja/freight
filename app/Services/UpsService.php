@@ -153,9 +153,10 @@ class UpsService implements ShippingServiceInterface
             $rateResponse = $rate->getRate($rateRequest);
             $ratedShipment = $rateResponse->RatedShipment;
             $TotalCharges = $ratedShipment[0]->TotalCharges;
-            return $TotalCharges->MonetaryValue;
+            return response()->json(['price' => $TotalCharges->MonetaryValue], 200);
+
         } catch (Exception $e){
-            return $e->getMessage();
+            return response()->json(['error' => $e->getMessage()], 402);
         }
     }
 }

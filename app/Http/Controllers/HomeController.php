@@ -40,7 +40,7 @@ class HomeController extends Controller
         $rules = $this->shippingService->getRule($count);
         $this->validate($request,$rules);
         $shippingData = $this->shippingService->returnData($request);
-        $price = $this->shippingService->call($shippingData);
-        return response()->json(['price' => $price], 200);
+        $result = $this->shippingService->call($shippingData);
+        return $result;
     }
 }
