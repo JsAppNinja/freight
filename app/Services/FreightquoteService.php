@@ -77,6 +77,7 @@ class FreightquoteService implements ShippingServiceInterface
                     'CustomerId' => '0',
                     'QuoteType' => $request->item['quoteType'],
                     'ServiceType' => $request->item['freightquoteServiceType'],
+                    'BillCollect' => 'SHIPPER',
                     'QuoteShipment' => array(
                         'IsBlind' => $request->item['isBlind'],
                         'ShipmentLocations' => array(
@@ -124,7 +125,99 @@ class FreightquoteService implements ShippingServiceInterface
 
         $xml = $this->_arrayToXml($freightquote);
 
-        $endpoint_url = "https://b2b.Freightquote.com/WebService/QuoteService.asmx";
+        $xml = '<?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope
+        	xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        	<soap:Body>
+        		<GetRatingEngineQuote
+        			xmlns="http://tempuri.org/">
+        			<request>
+        				<CustomerId>0</CustomerId>
+        				<QuoteType>B2B</QuoteType>
+        				<ServiceType>LTL</ServiceType>
+        				<QuoteShipment>
+        					<IsBlind>false</IsBlind>
+        					<PickupDate>2017-04-23T00:00:00</PickupDate>
+        					<SortAndSegregate>false</SortGetRatingEngineQuoteAndSegregate>
+        					<UseStackableFlag>false</UseStackableFlag>
+        					<DeclaredValue>20000</DeclaredValue>
+        					<MaxPickupDate />
+        					<TLDeliveryDate />
+        					<TLEquipmentType>Any</TLEquipmentType>
+        					<TLEquipmentSize>Any</TLEquipmentSize>
+        					<TLTarpSizeType>NoTarpRequired</TLTarpSizeType>
+        					<ShipmentLocations>
+        						<Location>
+        							<LocationType>Origin</LocationType>
+        							<HasLoadingDock>false</HasLoadingDock>
+        							<IsConstructionSite>false</IsConstructionSite>
+        							<RequiresInsideDelivery>false</RequiresInsideDelivery>
+        							<IsTradeShow>false</IsTradeShow>
+        							<TradeShow>TradeShowDesc</TradeShow>
+        							<IsResidential>false</IsResidential>
+        							<RequiresLiftgate>false</RequiresLiftgate>
+        							<HasAppointment>false</HasAppointment>
+        							<IsLimitedAccess>false</IsLimitedAccess>
+        							<LocationAddress>
+        								<PostalCode>30303</PostalCode>
+        								<CountryCode>US</CountryCode>
+        							</LocationAddress>
+        							<AdditionalServices />
+        						</Location>
+        						<Location>
+        							<LocationType> Destination</LocationType>
+        							<HasLoadingDock>false</HasLoadingDock>
+        							<IsConstructionSite>false</IsConstructionSite>
+        							<RequiresInsideDelivery>false</RequiresInsideDelivery>
+        							<IsTradeShow>false</IsTradeShow>
+        							<TradeShow>TradeShowDesc</TradeShow>
+        							<IsResidential>false</IsResidential>
+        							<RequiresLiftgate>false</RequiresLiftgate>
+        							<HasAppointment>false</HasAppointment>
+        							<IsLimitedAccess>false</IsLimitedAccess>
+        							<LocationAddress>
+        								<PostalCode>60606</PostalCode>
+        								<CountryCode>US</CountryCode>
+        							</LocationAddress>
+        							<AdditionalServices />
+        						</Location>
+        					</ShipmentLocations>
+        					<ShipmentProducts>
+        						<Product>
+        							<Class>55</Class>
+        							<Weight>1200</Weight>
+        							<Length>0</Length>
+        							<Width>0</Width>
+        							<Height>0</Height>
+        							<ProductDescription>Books</ProductDescription>
+        							<PackageType>Pallets_48x48</PackageType>
+        							<IsStackable>false</IsStackable>
+        							<DeclaredValue>0</DeclaredValue>
+        							<CommodityType>GeneralMerchandise</CommodityType>
+        							<ContentType>NewCommercialGoods</ContentType>
+        							<IsHazardousMaterial>false</IsHazardousMaterial>
+        							<NMFC />
+        							<DimWeight>0</DimWeight>
+        							<EstimatedWeight>0</EstimatedWeight>
+        							<PieceCount>5</PieceCount>
+        							<ItemNumber>0</ItemNumber>
+        							<ProductDrops />
+        						</Product>
+        					</ShipmentProducts>
+        					<ShipmentContacts />
+        				</QuoteShipment>
+        			</request>
+        			<user>
+        				<Name>xmltest@freightquote.com</Name>
+        				<Password>xml</Password>
+        				<CredentialType>Default</CredentialType>
+        			</user>
+        		</GetRatingEngineQuote>
+        	</soap:Body>
+        </soap:Envelope>';
+        $endpoint_url = "https://b2b.freightquote.com/WebService/QuoteService.asmx";
 
         $headers = array(
             'Content-Type: text/xml; charset=utf-8',
@@ -148,6 +241,7 @@ class FreightquoteService implements ShippingServiceInterface
             curl_close($ch);
 
             //Simple check to make sure that this is a valid XML response
+            // echo($response); $exit;
             if (strpos(strtolower($response), 'soap:envelope') === false) {
                 return response()->json(['error' => 'Freightquote.com: Invalid response from server.'], 402);
                 // return 'Freightquote.com: Invalid response from server.';
