@@ -600,7 +600,28 @@
                                 <div class="form-group col-sm-6 no-side-margin">
                                     <label class="col-md-4">Class:</label>
                                     <div class="col-md-8">
-                                        <input name="items[0][class]" type="text" class="input full-width"></input>
+                                        <!-- <input name="items[0][class]" type="text" class="input full-width"></input> -->
+                                        <select name="items[0][class]" class="full-width">
+                                            <option value=""></option>
+                                            <option value="50">50</option>
+                                            <option value="55">55</option>
+                                            <option value="60">60</option>
+                                            <option value="65">65</option>
+                                            <option value="70">70</option>
+                                            <option value="77.5">77.5</option>
+                                            <option value="85">85</option>
+                                            <option value="92.5">92.5</option>
+                                            <option value="100">100</option>
+                                            <option value="110">110</option>
+                                            <option value="125">125</option>
+                                            <option value="150">150</option>
+                                            <option value="175">175</option>
+                                            <option value="200">200</option>
+                                            <option value="250">250</option>
+                                            <option value="300">300</option>
+                                            <option value="400">400</option>
+                                            <option value="500">500</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6 no-side-margin">
@@ -850,74 +871,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="row" name="Freightquote">
-                                <div class="form-group col-sm-6 no-side-margin">
-                                    <div class="col-md-12">
-                                        <label>HazardousMaterialPackingGroup:</label>
-                                        <select name="items[0][hazardousMaterialPackingGroup]" class="full-width">
-                                            <option value="None">None</option>
-                                            <option value="I_GreatDanger">I_GreatDanger</option>
-                                            <option value="II_MediumDanger">II_MediumDanger</option>
-                                            <option value="III_MinorDanger">III_MinorDanger</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-6 no-side-margin">
-                                    <div class="col-md-12">
-                                        <label>HazardousMaterialHazardClass:</label>
-                                        <select name="items[0][hazardousMaterialHazardClass]" class="full-width">
-                                            <option value="Class_1_1A">Class_1_1A</option>
-                                            <option value="Class_1_1B">Class_1_1B</option>
-                                            <option value="Class_1_1C">Class_1_1C</option>
-                                            <option value="Class_1_1D">Class_1_1D</option>
-                                            <option value="Class_1_1E">Class_1_1E</option>
-                                            <option value="Class_1_1F">Class_1_1F</option>
-                                            <option value="Class_1_1G">Class_1_1G</option>
-                                            <option value="Class_1_1J">Class_1_1J</option>
-                                            <option value="Class_1_1L">Class_1_1L</option>
-                                            <option value="Class_1_2B">Class_1_2B</option>
-                                            <option value="Class_1_2C">Class_1_2C</option>
-                                            <option value="Class_1_2D">Class_1_2D</option>
-                                            <option value="Class_1_2E">Class_1_2E</option>
-                                            <option value="Class_1_2F">Class_1_2F</option>
-                                            <option value="Class_1_2G">Class_1_2G</option>
-                                            <option value="Class_1_2H">Class_1_2H</option>
-                                            <option value="Class_1_2J">Class_1_2J</option>
-                                            <option value="Class_1_2K">Class_1_2K</option>
-                                            <option value="Class_1_2L">Class_1_2L</option>
-                                            <option value="Class_1_3C">Class_1_3C</option>
-                                            <option value="Class_1_3F">Class_1_3F</option>
-                                            <option value="Class_1_3G">Class_1_3G</option>
-                                            <option value="Class_1_3H">Class_1_3H</option>
-                                            <option value="Class_1_3J">Class_1_3J</option>
-                                            <option value="Class_1_3K">Class_1_3K</option>
-                                            <option value="Class_1_3L">Class_1_3L</option>
-                                            <option value="Class_1_4B">Class_1_4B</option>
-                                            <option value="Class_1_4C">Class_1_4C</option>
-                                            <option value="Class_1_4D">Class_1_4D</option>
-                                            <option value="Class_1_4E">Class_1_4E</option>
-                                            <option value="Class_1_4F">Class_1_4F</option>
-                                            <option value="Class_1_4G">Class_1_4G</option>
-                                            <option value="Class_1_4S">Class_1_4S</option>
-                                            <option value="Class_1_5D">Class_1_5D</option>
-                                            <option value="Class_2_1">Class_2_1</option>
-                                            <option value="Class_2_2">Class_2_2</option>
-                                            <option value="Class_2_3">Class_2_3</option>
-                                            <option value="Class_3_0">Class_3_0</option>
-                                            <option value="Class_4_1">Class_4_1</option>
-                                            <option value="Class_4_2">Class_4_2</option>
-                                            <option value="Class_4_3">Class_4_3</option>
-                                            <option value="Class_5_1">Class_5_1</option>
-                                            <option value="Class_5_2">Class_5_2</option>
-                                            <option value="Class_6_1">Class_6_1</option>
-                                            <option value="Class_6_2">Class_6_2</option>
-                                            <option value="Class_7_0">Class_7_0</option>
-                                            <option value="Class_8_0">Class_8_0</option>
-                                            <option value="Class_9_0">Class_9_0</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                     <button type="button" id="addItem"><i class="glyphicon glyphicon-plus"></i>add new Item</button>

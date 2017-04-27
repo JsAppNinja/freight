@@ -85,10 +85,6 @@ class FedexService implements ShippingServiceInterface
         $fedex['RequestedShipment']['ShipTimestamp'] = date('c');
         $fedex['RequestedShipment']['ServiceType'] = $request->item['serviceType']; //'INTERNATIONAL_PRIORITY'; // valid values STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, ...
         $fedex['RequestedShipment']['PackagingType'] = $request->item['packagingType']; //'YOUR_PACKAGING'; // valid values FEDEX_BOX, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING, ...
-        // $fedex['RequestedShipment']['TotalInsuredValue']=array(
-        //     'Ammount'=>100,
-        //     'Currency'=>'USD'
-        // );
         $fedex['RequestedShipment']['Shipper'] = $this->addShipper($request);
         $fedex['RequestedShipment']['Recipient'] = $this->addRecipient($request);
         $fedex['RequestedShipment']['ShippingChargesPayment'] = $this->addShippingChargesPayment($request);
@@ -127,25 +123,6 @@ class FedexService implements ShippingServiceInterface
 
             if ($response -> HighestSeverity != 'FAILURE' && $response -> HighestSeverity != 'ERROR'){
                 $rateReply = $response -> RateReplyDetails;
-
-                // echo '<table border="1">';
-                // echo '<tr><td>Service Type</td><td>Amount</td><td>Delivery Date</td></tr><tr>';
-            	// $serviceType = '<td>'.$rateReply -> ServiceType . '</td>';
-            	// if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)){
-        		// 	$amount = '<td>$' . number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",") . '</td>';
-        		// }elseif($rateReply->RatedShipmentDetails && ! is_array($rateReply->RatedShipmentDetails)){
-        		// 	$amount = '<td>$' . number_format($rateReply->RatedShipmentDetails->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",") . '</td>';
-        		// }
-                // if(array_key_exists('DeliveryTimestamp',$rateReply)){
-                // 	$deliveryDate= '<td>' . $rateReply->DeliveryTimestamp . '</td>';
-                // }else if(array_key_exists('TransitTime',$rateReply)){
-                // 	$deliveryDate= '<td>' . $rateReply->TransitTime . '</td>';
-                // }else {
-                // 	$deliveryDate='<td>&nbsp;</td>';
-                // }
-                // echo $serviceType . $amount. $deliveryDate;
-                // echo '</tr>';
-                // echo '</table>';
 
                 if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)) {
                     $amount = number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",");

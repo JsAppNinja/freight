@@ -107,10 +107,6 @@ class UpsService implements ShippingServiceInterface
             $shipToAddress->setPostalCode($request->item['destination']['postalCode']);
             $shipToAddress->setCountryCode($request->item['destination']['country']);
 
-
-            // $shipment->Service->Code = '03';
-
-
             // multi package
             for($i = 0; $i < $request->get('count'); $i++) {
                 $package = new Package;
